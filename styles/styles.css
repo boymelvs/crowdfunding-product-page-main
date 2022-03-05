@@ -1,0 +1,319 @@
+@import url("https://fonts.googleapis.com/css2?family=Commissioner:wght@400;500;700&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap");
+
+*,
+::before,
+::after {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+:root {
+   /* Primay Color */
+   --moderate-cyan: #3cb4ac;
+   --dark-cyan: #147b74;
+
+   /* Neutral Color */
+   --black: #000000;
+   --white: #ffffff;
+   --dark-gray: #7a7a7a;
+   --border-color: #dfdbdb;
+   --body-bg: #f5f5f5;
+
+   /* Font */
+   --font-fam-commissioner: "Commissioner", sans-serif;
+   --font-fam-spacemono: "Space Mono", monospace;
+   --font-size-10: 62.5%; /* 10px */
+   --font-weight-400: 400;
+   --font-weight-500: 500;
+   --font-weight-700: 700;
+
+   /* burger line color */
+   --burger-line-color: #ffffff;
+}
+
+html {
+   scroll-behavior: smooth;
+   font-size: var(--font-size-10);
+   font-weight: var(--font-weight-400);
+   font-family: var(--font-fam-commissioner);
+}
+
+body {
+   font-size: 1.6rem;
+   min-width: 32rem;
+   max-width: 1440px;
+   margin: auto;
+   background: var(--body-bg);
+}
+
+.overlay.active {
+   position: absolute;
+   top: 0;
+   left: 0;
+   width: 100%;
+   height: 100%;
+   background: var(--black);
+   opacity: 0.65;
+}
+
+@media (min-width: 769px) {
+   .overlay {
+      display: none;
+   }
+}
+
+.container {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
+/* ================= ================= ================= ================= */
+/*                         header start here mobile first                  */
+/* ================= ================= ================= ================= */
+
+.header {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   padding: 4.5rem 3rem 18rem 3rem;
+
+   position: relative;
+   width: 100%;
+}
+
+@media (min-width: 769px) {
+   .header {
+      padding: 0rem 10rem 22rem 14rem;
+   }
+}
+
+.header_hero {
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: -1;
+   width: 100%;
+}
+
+.desktop_hero,
+.mobile_hero {
+   width: 100%;
+   height: 100%;
+}
+
+.crowdfund_logo_container img:hover {
+   cursor: pointer;
+   z-index: 1;
+}
+
+.nav_list {
+   display: none;
+   position: absolute;
+   top: 9rem;
+   left: 0;
+
+   width: 100%;
+   padding: 2rem 4rem;
+
+   visibility: hidden;
+   transform: translateX(-100%); /* slide */
+   transition: all 250ms ease-in-out;
+}
+
+/* add show & active classes using javascript start here */
+.nav_list.show {
+   display: block; /* show the display */
+}
+
+.nav_list.active {
+   visibility: visible;
+   transform: translateX(0%); /* slide */
+} /* add show & active classes using javascript end here */
+
+/* triangle pointer */
+.pointer {
+   position: absolute;
+   top: -1rem;
+   right: 5rem;
+   border: 5rem solid transparent;
+   border-top: 0;
+   border-bottom: 5rem solid var(--white);
+   transform: rotate(-90deg);
+   z-index: -1;
+}
+
+@media (min-width: 769px) {
+   /* triangle pointer */
+   .pointer {
+      display: none;
+   }
+}
+
+.nav_list ul {
+   background: var(--white);
+   border-radius: 1rem;
+   width: 100%;
+}
+
+.nav_list ul li {
+   list-style-type: none;
+   font-weight: var(--font-weight-500);
+   padding: 2rem 0;
+}
+
+.nav_list ul li:nth-last-child(1n + 2):hover,
+.nav_list ul li a:hover {
+   cursor: pointer;
+   background: var(--dark-cyan);
+   font-weight: var(--font-weight-700);
+}
+
+.nav_list ul li:hover > a {
+   color: var(--white);
+}
+
+.nav_list ul li:nth-child(1) {
+   border-radius: 1rem 1rem 0 0;
+   border-bottom: 0.1rem solid var(--border-color);
+}
+
+.nav_list ul li:nth-child(3) {
+   border-radius: 0 0 1rem 1rem;
+   border-top: 0.1rem solid var(--border-color);
+}
+
+.nav_list ul li a {
+   padding-left: 3rem;
+   text-decoration: none;
+   color: var(--black);
+}
+
+@media (min-width: 769px) {
+   .nav_list {
+      display: block;
+      position: unset;
+      width: unset;
+      visibility: visible;
+      transform: translateX(0%);
+   }
+
+   .nav_list ul {
+      display: flex;
+      flex-direction: row;
+      gap: 2rem; /* between each list */
+
+      position: unset;
+      background: unset;
+   }
+
+   .nav_list ul li {
+      font-size: 1.4rem;
+   }
+
+   .nav_list ul li:nth-last-child(1n + 2):hover,
+   .nav_list ul li a:hover {
+      cursor: pointer;
+      transform: scale(1.15);
+      background: unset;
+   }
+
+   .nav_list ul li:nth-child(1) {
+      border: none;
+   }
+
+   .nav_list ul li:nth-child(3) {
+      border: none;
+   }
+
+   .nav_list ul li a {
+      color: var(--white);
+   }
+}
+
+/* all about burger is here */
+.burger_menu {
+   display: flex;
+   flex-direction: column;
+   gap: 0.3rem; /* between each line */
+   z-index: 1;
+   height: 1.8rem;
+}
+
+.burger_menu:hover {
+   cursor: pointer;
+   transform: scale(1.1);
+}
+
+.burger_line {
+   width: 3.5rem;
+   border: 0.15rem solid var(--burger-line-color);
+   transition: all 300ms;
+   background-color: var(--burger-line-color);
+}
+
+/* add active classes using javascript */
+.line1.active {
+   width: 2.4rem;
+   transform: rotate(45deg);
+   transform-origin: left top;
+}
+
+.line2.active {
+   display: none;
+}
+
+.line3.active {
+   margin-top: 1rem;
+   width: 2.4rem;
+   transform: rotate(-45deg);
+   transform-origin: left bottom;
+}
+
+@media (min-width: 769px) {
+   .burger_menu {
+      display: none;
+   }
+}
+
+/* ================= ================= ================= ================= */
+/*                         main start here mobile first                  */
+/* ================= ================= ================= ================= */
+
+.main_content {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+
+   padding: 0 2.5rem;
+   width: 100%;
+}
+
+@media (min-width: 769px) {
+   .main_content {
+      padding: 0 35rem;
+      /* padding: 0rem 14rem 15rem 14rem; */
+   }
+}
+
+.intro {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 2rem;
+
+   background: var(--white);
+   border-radius: 1rem;
+   width: 100%;
+   text-align: center;
+   padding: 0 1rem;
+}
+
+.mastercraft_logo {
+   margin-top: -2.5rem;
+}
