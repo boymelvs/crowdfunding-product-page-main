@@ -1,21 +1,24 @@
 "use strict";
 
-const addClasses = (value) => {
-   value.classList.add("show");
+/* add/remove show & active classes */
+const addRemoveClasses = (value) => {
+   if (value.classList.contains("show")) {
+      value.classList.remove("active");
 
-   /* time delay for adding active classes */
-   setTimeout(() => {
-      value.classList.add("active");
-   }, 0.1);
-};
+      /* time delay for removing show classes */
+      setTimeout(() => {
+         value.classList.remove("show");
+      }, 250);
 
-const removeClasses = (value) => {
-   value.classList.remove("active");
+      /* adding classes */
+   } else {
+      value.classList.add("show");
 
-   /* time delay for removing show classes */
-   setTimeout(() => {
-      value.classList.remove("show");
-   }, 250);
+      /* time delay for adding active classes */
+      setTimeout(() => {
+         value.classList.add("active");
+      }, 0.1);
+   }
 };
 
 /* provide switching like bookmark slide */
@@ -23,21 +26,13 @@ const toggle = (value) => {
    value.classList.toggle("active");
 };
 
-const slide = (elements) => {
-   elements.forEach((element) => {
-      toggle(element);
-   });
-};
-
-/* provide looping for multiple elements */
+/* provide looping for multiple elements like burger_line, bookmark_slide */
 const selectEachELement = (elements) => {
    elements.length > 1
       ? elements.forEach((element) => {
-           element.classList.contains("show") ? removeClasses(element) : addClasses(element);
+           element.classList.contains("bookmark_slide") ? toggle(element) : addRemoveClasses(element);
         })
-      : elements.classList.contains("show")
-      ? removeClasses(elements)
-      : addClasses(elements);
+      : addRemoveClasses(elements);
 };
 
 /* if burger is click run this function */
@@ -57,10 +52,9 @@ const clickSlider = (bookmarks) => {
    const bookmarkEd = document.querySelector(".ed");
    bookmarks.forEach((bookmark) => {
       bookmark.addEventListener("click", () => {
-         slide(bookmarks);
+         selectEachELement(bookmarks);
          toggle(bookmarkText);
          toggle(bookmarkEd);
-         console.log("this is bookmark", bookmark);
       });
    });
 };
