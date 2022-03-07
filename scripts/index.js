@@ -1,32 +1,43 @@
 "use strict";
 
-const addRemoveClasses = (value) => {
-   if (value.classList.contains("active")) {
-      value.classList.remove("active");
+const addClasses = (value) => {
+   value.classList.add("show");
 
-      /* time delay for removing show classes */
-      setTimeout(() => {
-         value.classList.remove("show");
-      }, 250);
+   /* time delay for adding active classes */
+   setTimeout(() => {
+      value.classList.add("active");
+   }, 0.1);
+};
 
-      /* adding show & active classes */
-   } else {
-      value.classList.add("show");
+const removeClasses = (value) => {
+   value.classList.remove("active");
 
-      /* time delay for adding active classes */
-      setTimeout(() => {
-         value.classList.add("active");
-      }, 0.1);
-   }
+   /* time delay for removing show classes */
+   setTimeout(() => {
+      value.classList.remove("show");
+   }, 250);
+};
 
-   value.classList.contains("slide") ? value.classList.remove("slide") : value.classList.add("slide");
+/* provide switching like bookmark slide */
+const toggle = (value) => {
+   value.classList.toggle("active");
+};
+
+const slide = (elements) => {
+   elements.forEach((element) => {
+      toggle(element);
+   });
 };
 
 /* provide looping for multiple elements */
 const selectEachELement = (elements) => {
-   elements.forEach((element) => {
-      addRemoveClasses(element);
-   });
+   elements.length > 1
+      ? elements.forEach((element) => {
+           element.classList.contains("show") ? removeClasses(element) : addClasses(element);
+        })
+      : elements.classList.contains("show")
+      ? removeClasses(elements)
+      : addClasses(elements);
 };
 
 /* if burger is click run this function */
@@ -35,8 +46,22 @@ const clickBurger = (burger, burgerLines, navList) => {
 
    burger.addEventListener("click", () => {
       selectEachELement(burgerLines);
-      addRemoveClasses(navList);
-      addRemoveClasses(overlay);
+      selectEachELement(navList);
+      selectEachELement(overlay);
+   });
+};
+
+/* if bookmark is click run this function */
+const clickSlider = (bookmarks) => {
+   const bookmarkText = document.querySelector(".bookmark_text");
+   const bookmarkEd = document.querySelector(".ed");
+   bookmarks.forEach((bookmark) => {
+      bookmark.addEventListener("click", () => {
+         slide(bookmarks);
+         toggle(bookmarkText);
+         toggle(bookmarkEd);
+         console.log("this is bookmark", bookmark);
+      });
    });
 };
 
@@ -47,15 +72,7 @@ const navList = document.querySelector(".nav_list");
 
 clickBurger(burger, burgerLines, navList);
 
-/* get bookmark to slid */
+/* get bookmark to slide */
 const bookmarks = document.querySelectorAll(".bookmark_slide");
 
-const bookmarksSlider = () => {
-   bookmarks.forEach((bookmark) => {
-      bookmark.addEventListener("click", () => {
-         selectEachELement(bookmarks);
-      });
-   });
-};
-
-bookmarksSlider();
+clickSlider(bookmarks);
