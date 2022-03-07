@@ -18,6 +18,8 @@ const addRemoveClasses = (value) => {
          value.classList.add("active");
       }, 0.1);
    }
+
+   value.classList.contains("slide") ? value.classList.remove("slide") : value.classList.add("slide");
 };
 
 /* provide looping for multiple elements */
@@ -44,3 +46,16 @@ const burgerLines = document.querySelectorAll(".burger_line");
 const navList = document.querySelector(".nav_list");
 
 clickBurger(burger, burgerLines, navList);
+
+/* get bookmark to slid */
+const bookmarks = document.querySelectorAll(".bookmark_slide");
+
+const bookmarksSlider = () => {
+   bookmarks.forEach((bookmark) => {
+      bookmark.addEventListener("click", () => {
+         selectEachELement(bookmarks);
+      });
+   });
+};
+
+bookmarksSlider();
