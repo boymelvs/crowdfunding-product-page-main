@@ -21,7 +21,7 @@ const addRemoveClasses = (value) => {
    }
 };
 
-/* provide switching like bookmark slide */
+/* provide switching like bookmark slide, overlay */
 const toggle = (value) => {
    value.classList.toggle("active");
 };
@@ -36,13 +36,11 @@ const selectEachELement = (elements) => {
 };
 
 /* if burger is click run this function */
-const clickBurger = (burger, burgerLines, navList) => {
-   const overlay = document.querySelector(".overlay");
-
+const clickBurger = (burger, burgerLines, navList, overlay) => {
    burger.addEventListener("click", () => {
       selectEachELement(burgerLines);
       selectEachELement(navList);
-      selectEachELement(overlay);
+      toggle(overlay);
    });
 };
 
@@ -59,12 +57,15 @@ const clickSlider = (bookmarks) => {
    });
 };
 
+/* get the overlay */
+const overlay = document.querySelector(".overlay");
+
 /* get burger element & nav list */
 const burger = document.querySelector(".burger_menu");
 const burgerLines = document.querySelectorAll(".burger_line");
 const navList = document.querySelector(".nav_list");
 
-clickBurger(burger, burgerLines, navList);
+clickBurger(burger, burgerLines, navList, overlay);
 
 /* get bookmark to slide */
 const bookmarks = document.querySelectorAll(".bookmark_slide");

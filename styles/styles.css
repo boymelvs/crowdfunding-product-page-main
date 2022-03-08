@@ -19,6 +19,7 @@
    --black: #000000;
    --white: #ffffff;
    --dark-gray: #7a7a7a;
+   --light-gray: rgb(122, 122, 122, 0.3);
    --border-color: #dfdbdb;
    --body-bg: #f5f5f5;
 
@@ -73,13 +74,21 @@ body {
 .container {
    display: flex;
    flex-direction: column;
+   align-items: center;
+   justify-content: center;
    min-height: 100vh;
 }
 
-/* ================= ================= ================= ================= */
-/*                         header start here mobile first                  */
-/* ================= ================= ================= ================= */
+footer {
+   font-family: var(--font-fam-spacemono);
+   font-size: 1.4rem;
+   padding: 1.5rem 0;
+   text-align: center;
+}
 
+/* ================= ================= ================= ================= */
+/*                   header start here mobile first                        */
+/* ================= ================= ================= ================= */
 .header {
    display: flex;
    align-items: center;
@@ -98,25 +107,31 @@ body {
 
 @media (min-width: 425px) {
    .header {
-      padding: 4.5rem 2.5rem 22rem 2.5rem;
+      padding: 4.5rem 2.5rem 17rem 2.5rem;
    }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 600px) {
    .header {
-      padding: 4.5rem 2.5rem 40rem 2.5rem;
+      padding: 0rem 1rem 30rem 2.5rem;
    }
 }
 
 @media (min-width: 769px) {
    .header {
-      padding: 0 2.5rem 12rem 2.5rem;
+      padding: 0 1rem 12rem 2.5rem;
+   }
+}
+
+@media (min-width: 1024px) {
+   .header {
+      padding: 0 3rem 12rem 7rem;
    }
 }
 
 @media (min-width: 1440px) {
    .header {
-      padding: 0 2.5rem 20rem 2.5rem;
+      padding: 0 12rem 20rem 15rem;
    }
 }
 
@@ -178,7 +193,7 @@ body {
    z-index: -1;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 600px) {
    /* triangle pointer */
    .pointer {
       display: none;
@@ -224,7 +239,7 @@ body {
    color: var(--black);
 }
 
-@media (min-width: 769px) {
+@media (min-width: 600px) {
    .nav_list {
       display: block;
       position: unset;
@@ -271,7 +286,7 @@ body {
    display: flex;
    flex-direction: column;
    gap: 0.3rem; /* between each line */
-   z-index: 1;
+   z-index: 2;
    height: 1.8rem;
 }
 
@@ -287,7 +302,7 @@ body {
    background-color: var(--burger-line-color);
 }
 
-/* add active classes using javascript */
+/* add active classes using javascript for burger menu start here */
 .line1.active {
    width: 2.4rem;
    transform: rotate(45deg);
@@ -304,15 +319,16 @@ body {
    transform: rotate(-45deg);
    transform-origin: left bottom;
 }
+/* add active classes using javascript for burger menu end here */
 
-@media (min-width: 769px) {
+@media (min-width: 600px) {
    .burger_menu {
       display: none;
    }
 }
 
 /* ================= ================= ================= ================= */
-/*                         main start here mobile first                  */
+/*                   main start here mobile first                          */
 /* ================= ================= ================= ================= */
 
 .main_content {
@@ -329,24 +345,22 @@ body {
 @media (min-width: 1024px) {
    .main_content {
       padding: 0 20rem;
-      /* padding: 0rem 14rem 15rem 14rem; */
    }
 }
 
 @media (min-width: 1440px) {
    .main_content {
       padding: 0 35rem;
-      /* padding: 0rem 14rem 15rem 14rem; */
    }
 }
 
-/* ================= intro ================= */
+/* ================= intro is here ================= */
 .intro {
    display: flex;
    flex-direction: column;
    align-items: center;
    justify-content: center;
-   gap: 2rem;
+   gap: 2rem; /* between logo, intro_title & desciption */
 
    background: var(--white);
    border-radius: 1rem;
@@ -380,13 +394,11 @@ body {
 .back_bookmark_btn_container {
    display: grid;
    grid-template-columns: 1fr auto;
-   grid-gap: 1rem;
+   grid-gap: 1rem; /* between back & bookmark button */
    align-items: center;
 
    width: 100%;
    padding: 0 2rem;
-
-   /* border: 0.1rem solid red; */
 }
 
 .btn {
@@ -399,8 +411,10 @@ body {
    font-weight: var(--font-weight-700);
    letter-spacing: 0.1rem;
 
-   cursor: pointer;
    width: 100%;
+   transition: all 300ms ease-in-out;
+   outline: none;
+   cursor: pointer;
 }
 
 .back_btn {
@@ -412,7 +426,7 @@ body {
 
 .back_btn:hover {
    background: var(--dark-cyan);
-   transform: scale(1.05);
+   transform: scale(1.015);
 }
 
 @media (min-width: 370px) {
@@ -424,10 +438,10 @@ body {
 .bookmark_btn {
    display: flex;
    border: none;
-   gap: 1rem; /* between circle & bookmark */
+   gap: 1rem; /* between circle & bookmark_text */
 }
 
-/* add slide classes using javascript */
+/* add active classes using javascript */
 .bookmark_btn.active {
    background: #f4f8f9;
 }
@@ -442,11 +456,11 @@ body {
    fill: var(--dark-gray);
 }
 
-.bookmark_btn .circle_color:hover {
+.bookmark_btn svg g:hover > circle {
    fill: var(--dark-cyan);
 }
 
-/* add slide classes using javascript */
+/* add active classes using javascript */
 .bookmark_btn .circle_color.active {
    fill: var(--dark-cyan);
 }
@@ -504,6 +518,7 @@ body {
    justify-content: center;
    flex-direction: column;
    gap: 2rem; /* between statistics_group & statistics_bar */
+   border-radius: 1rem;
    width: 100%;
 
    background: var(--white);
@@ -517,7 +532,6 @@ body {
    align-items: center;
    justify-content: center;
    gap: 2rem; /* between each stats */
-   /* padding: 3rem 0; */
    width: 100%;
 }
 
@@ -534,8 +548,8 @@ body {
    .statistics_group .stats:nth-child(2) {
       width: 100%;
       align-items: center;
-      border-left: 0.15rem solid var(--dark-gray);
-      border-right: 0.15rem solid var(--dark-gray);
+      border-left: 0.2rem solid var(--light-gray);
+      border-right: 0.2rem solid var(--light-gray);
    }
 
    .statistics_group .stats:nth-child(3) {
@@ -557,13 +571,17 @@ body {
    color: var(--black);
 }
 
+.stats_details {
+   font-weight: var(--font-weight-500);
+}
+
 .statistics_group .stats:nth-child(2) p:nth-child(1) {
-   border-top: 0.15rem solid var(--dark-gray);
+   border-top: 0.2rem solid var(--light-gray);
    padding-top: 3rem;
 }
 
 .statistics_group .stats:nth-child(2) p:nth-child(2) {
-   border-bottom: 0.15rem solid var(--dark-gray);
+   border-bottom: 0.2rem solid var(--light-gray);
    padding-bottom: 3rem;
 }
 
@@ -579,7 +597,7 @@ body {
    }
 }
 
-/* progress bar */
+/* ================= progress bar ================= */
 .statistics_bar,
 .progress_bar {
    border-radius: 1rem;
@@ -588,12 +606,265 @@ body {
 
 .statistics_bar {
    width: 100%;
-   background: #f4f8f9;
+   background: rgb(244, 248, 249);
+   /* background: #f4f8f9; */
 }
 
 .progress_bar {
    width: 80%;
    background: var(--moderate-cyan);
+}
+
+/* ================= about this project is here ================= */
+.about_project {
+   display: flex;
+   flex-direction: column;
+   gap: 3rem; /* between about_project & pledges */
+   border-radius: 1rem;
+   background: var(--white);
+   padding: 5rem;
+}
+
+.about_project_text {
+   display: flex;
+   flex-direction: column;
+   gap: 3rem; /* between about_project_title, details1 & details2*/
+}
+
+.about_project_text > p {
+   text-align: justify;
+}
+
+.about_project_title {
+   color: var(--black);
+}
+
+/* ================= about this project pledges is here ================= */
+.pledges {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem; /* between each pledge */
+}
+
+.stand_pledges {
+   display: flex;
+   flex-direction: column;
+   gap: 3rem; /* between title, details & reward */
+   border-radius: 1rem;
+   border: 0.2rem solid var(--light-gray);
+   padding: 3rem;
+}
+
+.plegde_title {
+   display: flex;
+   flex-direction: column;
+   gap: 0.75rem; /* title & pledge_or_more */
+   color: var(--black);
+}
+
+@media (min-width: 600px) {
+   .plegde_title {
+      flex-direction: row;
+      justify-content: space-between;
+   }
+}
+
+.pledge_or_more {
+   font-size: 1.4rem;
+   font-weight: var(--font-weight-500);
+   color: var(--moderate-cyan);
+}
+
+.pledge_details {
+   text-align: justify;
+}
+
+.pledge_reward {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
+   gap: 2rem; /* between days left & select_reward_btn */
+}
+
+@media (min-width: 600px) {
+   .pledge_reward {
+      flex-direction: row;
+      justify-content: space-between;
+   }
+}
+
+.pledge_days_count {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+   font-size: 3.5rem;
+   font-weight: var(--font-weight-700);
+   color: var(--black);
+}
+
+.pledge_days_left {
+   font-size: 1.6rem;
+   font-weight: var(--font-weight-500);
+   color: var(--dark-gray);
+}
+
+.select_reward_btn {
+   padding: 2rem;
+   border: none;
+   border-radius: 3rem;
+   background: var(--moderate-cyan);
+   color: var(--white);
+   font-weight: var(--font-weight-700);
+   letter-spacing: 0.1rem;
+   transition: all 300ms ease-in-out;
+   /* outline: none; */
+   width: 20rem;
+}
+
+.bamboo_reward_btn:hover,
+.black_edition_reward_btn:hover {
+   cursor: pointer;
+   background: var(--dark-cyan);
+   transform: scale(1.015);
+}
+
+.mahogany_edition_stand_pledge {
+   filter: opacity(0.5);
+   cursor: default;
+}
+
+.mahogany_reward_btn {
+   background: var(--dark-gray);
+   cursor: default;
+}
+
+/* ================= ================= ================= ================= */
+/*                   all about modal start                                 */
+/* ================= ================= ================= ================= */
+
+.modal_container {
+   display: flex;
+   flex-direction: column;
+   gap: 3rem; /* between modal_header & modal_pledges_container */
+   padding: 5rem;
+   background: var(--white);
+   border-radius: 1rem;
+}
+
+.modal_header {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem; /* between modal_head & modal_head_text */
+}
+
+.modal_head {
+   display: flex;
+   justify-content: space-between;
+   color: var(--black);
+   font-weight: var(--font-weight-700);
+}
+
+.modal_close_btn {
+   font-size: 3.5rem;
+   font-weight: var(--font-weight-700);
+   border: none;
+   background: transparent;
+   margin-top: -5rem;
+   color: var(--dark-gray);
+}
+
+.modal_close_btn:hover {
+   cursor: pointer;
+   transform: scale(1.2);
+}
+
+.modal_pledges {
+   border: 0.1rem solid var(--light-gray);
+   border-radius: 1rem;
+}
+
+.pledge_description_container {
+   display: flex;
+   flex-direction: column;
+   gap: 3rem;
+   padding: 4rem 3rem;
+}
+
+/* all about radio button */
+.radio_container {
+   display: flex;
+}
+
+.reward_radio {
+   position: absolute;
+   visibility: hidden;
+}
+
+.reward_label {
+   display: flex;
+   align-items: center;
+   gap: 2rem; /* between radio_control & reward_title */
+   position: relative;
+}
+
+.radio_control {
+   width: 3.5rem;
+   height: 3.5rem;
+   border-radius: 100%;
+   border: 0.2rem solid var(--dark-gray);
+}
+
+.reward_label:hover > .radio_control {
+   border: 0.3rem solid var(--moderate-cyan);
+   cursor: pointer;
+}
+
+.reward_title {
+   color: var(--black);
+}
+
+/* .reward_radio:checked ~ .reward_label .reward_title {
+   color: var(--moderate-cyan);
+} */
+
+.reward_label:hover > .reward_title {
+   color: var(--moderate-cyan);
+   cursor: pointer;
+}
+
+.radio_control::before {
+   content: "";
+   display: block;
+   width: 1.6rem;
+   height: 1.6rem;
+   border-radius: 100%;
+   position: absolute;
+   top: 1rem;
+   left: 1rem;
+}
+
+.reward_radio:checked ~ .reward_label .radio_control {
+   border: 0.2rem solid var(--moderate-cyan);
+}
+
+.reward_radio:checked ~ .reward_label .radio_control::before {
+   background: var(--moderate-cyan);
+}
+
+.reward_text {
+   padding-left: 5.5rem;
+}
+
+.pledge_amount_container {
+   /* height: 0; */
+   padding: 4rem 3rem;
+   border-top: 0.1rem solid var(--light-gray);
+}
+
+.pledge_form {
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
 }
 
 /* mediaa */
@@ -625,4 +896,4 @@ body {
    .header {
       padding: 0 2.5rem 20rem 2.5rem;
    }
-} */
+} */ ;
