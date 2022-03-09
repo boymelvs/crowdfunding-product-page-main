@@ -8,7 +8,7 @@ const addRemoveClasses = (value) => {
       /* time delay for removing show classes */
       setTimeout(() => {
          value.classList.remove("show");
-      }, 250);
+      }, 600);
 
       /* adding classes */
    } else {
@@ -23,6 +23,7 @@ const addRemoveClasses = (value) => {
 
 /* provide switching like bookmark slide, overlay */
 const toggle = (value) => {
+   // value.classList.toggle("show");
    value.classList.toggle("active");
 };
 
@@ -39,7 +40,7 @@ const selectEachELement = (elements) => {
 const clickBurger = (burger, burgerLines, navList, overlay) => {
    burger.addEventListener("click", () => {
       selectEachELement(burgerLines);
-      selectEachELement(navList);
+      addRemoveClasses(navList);
       toggle(overlay);
    });
 };
@@ -69,5 +70,52 @@ clickBurger(burger, burgerLines, navList, overlay);
 
 /* get bookmark to slide */
 const bookmarks = document.querySelectorAll(".bookmark_slide");
-
 clickSlider(bookmarks);
+
+/* get all about modal */
+const modalMainContainer = document.querySelector(".modal_main_container");
+
+const modalClose = document.querySelector(".modal_close_btn");
+modalClose.addEventListener("click", () => {
+   /* close modal */
+   addRemoveClasses(modalMainContainer);
+   /* close overlay */
+   toggle(overlay);
+});
+
+/* back this project button */
+const backBtn = document.querySelector(".back_btn");
+backBtn.addEventListener("click", (e) => {
+   e.preventDefault();
+   /* open modal */
+   addRemoveClasses(modalMainContainer);
+   /* opem overlay */
+   toggle(overlay);
+});
+
+/* success modal */
+const successModal = document.querySelector(".success_modal_main_container");
+
+/* got it button */
+const gotItBtn = document.querySelector(".got_it_btn");
+gotItBtn.addEventListener("click", () => {
+   /* close success modal */
+   addRemoveClasses(successModal);
+
+   /* opem overlay */
+   toggle(overlay);
+});
+
+/* get modal continue button */
+const continueBtns = document.querySelectorAll(".continue_btn");
+
+continueBtns.forEach((continueBtn) => {
+   continueBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      /* close modal */
+      addRemoveClasses(modalMainContainer);
+
+      /* open success modal */
+      addRemoveClasses(successModal);
+   });
+});
