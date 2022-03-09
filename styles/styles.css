@@ -65,7 +65,7 @@ body {
    z-index: 1;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 600px) {
    .overlay {
       display: none;
    }
@@ -446,7 +446,7 @@ footer {
    background: #f4f8f9;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
    .bookmark_btn {
       width: 17rem;
    }
@@ -465,7 +465,7 @@ footer {
    fill: var(--dark-cyan);
 }
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
    .bookmark_btn .circle {
       transform: translateX(0%);
       transition: all 300ms ease-in-out;
@@ -493,7 +493,7 @@ footer {
    cursor: pointer;
 }
 
-@media (min-width: 500px) {
+@media (min-width: 600px) {
    .bookmark_text {
       display: flex;
       font-weight: var(--font-weight-700);
@@ -535,7 +535,7 @@ footer {
    width: 100%;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 600px) {
    .statistics_group {
       flex-direction: row;
    }
@@ -585,7 +585,7 @@ footer {
    padding-bottom: 3rem;
 }
 
-@media (min-width: 769px) {
+@media (min-width: 600px) {
    .statistics_group .stats:nth-child(2) p:nth-child(1) {
       border-top: none;
       padding-top: 0;
@@ -622,7 +622,14 @@ footer {
    gap: 3rem; /* between about_project & pledges */
    border-radius: 1rem;
    background: var(--white);
-   padding: 5rem;
+   padding: 5rem 2rem;
+   /* width: 100%; */
+}
+
+@media (min-width: 600px) {
+   .about_project {
+      padding: 5rem;
+   }
 }
 
 .about_project_text {
@@ -644,6 +651,7 @@ footer {
    display: flex;
    flex-direction: column;
    gap: 2rem; /* between each pledge */
+   width: 100%;
 }
 
 .stand_pledges {
@@ -653,6 +661,7 @@ footer {
    border-radius: 1rem;
    border: 0.2rem solid var(--light-gray);
    padding: 3rem;
+   width: 100%;
 }
 
 .plegde_title {
@@ -683,23 +692,38 @@ footer {
    display: flex;
    flex-direction: column;
    align-items: flex-start;
-   gap: 2rem; /* between days left & select_reward_btn */
+   gap: 1.5rem; /* between days left & select_reward_btn */
 }
 
 @media (min-width: 600px) {
    .pledge_reward {
       flex-direction: row;
       justify-content: space-between;
+      gap: 15rem; /* between days left & select_reward_btn */
+      width: 100;
    }
 }
 
 .pledge_days_count {
    display: flex;
    align-items: center;
+   justify-content: center;
    gap: 1rem;
    font-size: 3.5rem;
    font-weight: var(--font-weight-700);
    color: var(--black);
+}
+
+.select_btn_container {
+   display: flex;
+   justify-content: flex-start;
+   width: 100%;
+}
+
+@media (min-width: 600px) {
+   .select_btn_container {
+      justify-content: flex-end;
+   }
 }
 
 .pledge_days_left {
@@ -709,7 +733,7 @@ footer {
 }
 
 .select_reward_btn {
-   padding: 2rem;
+   padding: 1.5rem 3.5rem;
    border: none;
    border-radius: 3rem;
    background: var(--moderate-cyan);
@@ -717,15 +741,14 @@ footer {
    font-weight: var(--font-weight-700);
    letter-spacing: 0.1rem;
    transition: all 300ms ease-in-out;
-   /* outline: none; */
-   width: 20rem;
 }
 
 .bamboo_reward_btn:hover,
-.black_edition_reward_btn:hover {
-   cursor: pointer;
+.black_edition_reward_btn:hover,
+.no_reward_btn:hover {
    background: var(--dark-cyan);
    transform: scale(1.015);
+   cursor: pointer;
 }
 
 .mahogany_edition_stand_pledge {
@@ -734,6 +757,7 @@ footer {
 }
 
 .mahogany_reward_btn {
+   padding: 1.5rem 4.5rem;
    background: var(--dark-gray);
    cursor: default;
 }
@@ -746,9 +770,10 @@ footer {
    display: flex;
    flex-direction: column;
    gap: 3rem; /* between modal_header & modal_pledges_container */
-   padding: 5rem;
+   padding: 5rem 2rem;
    background: var(--white);
    border-radius: 1rem;
+   width: 100%;
 }
 
 .modal_header {
@@ -778,6 +803,12 @@ footer {
    transform: scale(1.2);
 }
 
+.modal_pledges_container {
+   display: flex;
+   flex-direction: column;
+   gap: 3rem; /* between each pledges */
+}
+
 .modal_pledges {
    border: 0.1rem solid var(--light-gray);
    border-radius: 1rem;
@@ -786,114 +817,347 @@ footer {
 .pledge_description_container {
    display: flex;
    flex-direction: column;
-   gap: 3rem;
-   padding: 4rem 3rem;
+   align-items: center;
+   gap: 3.5rem; /* between label & reward_txt */
+   padding: 4.5rem 3rem 0 3rem;
 }
 
-/* all about radio button */
+.noreward_pledge_description_container {
+   padding-bottom: 4.5rem;
+}
+
+@media (min-width: 767px) {
+   .pledge_description_container {
+      padding-bottom: 4.5rem;
+   }
+}
+
+/* ================= all about radio button ================= */
 .radio_container {
    display: flex;
 }
 
-.reward_radio {
-   position: absolute;
-   visibility: hidden;
+.noreward_radio {
+   position: relative;
+   /* display: none; */
+   /* visibility: hidden; */
 }
 
 .reward_label {
    display: flex;
    align-items: center;
-   gap: 2rem; /* between radio_control & reward_title */
+   gap: 1rem; /* between radio_control & reward_title */
    position: relative;
+   width: 100%;
 }
 
-.radio_control {
+.radio_control_container {
    width: 3.5rem;
    height: 3.5rem;
    border-radius: 100%;
    border: 0.2rem solid var(--dark-gray);
+   position: absolute;
 }
 
-.reward_label:hover > .radio_control {
+.reward_label:hover > .radio_control_container {
    border: 0.3rem solid var(--moderate-cyan);
    cursor: pointer;
 }
 
 .reward_title {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
    color: var(--black);
+   width: 100%;
+   padding-left: 5rem;
+   gap: 0.5rem;
 }
 
-/* .reward_radio:checked ~ .reward_label .reward_title {
+.radio_title {
+   width: 100%;
+}
+
+@media (min-width: 767px) {
+   .reward_title {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 90%;
+   }
+}
+
+.pledge_more {
+   width: 100%;
+   font-weight: var(--font-weight-500);
    color: var(--moderate-cyan);
-} */
+}
 
 .reward_label:hover > .reward_title {
    color: var(--moderate-cyan);
    cursor: pointer;
 }
 
-.radio_control::before {
+.radio_control_container::before {
    content: "";
    display: block;
-   width: 1.6rem;
-   height: 1.6rem;
+   width: 1.5rem;
+   height: 1.5rem;
    border-radius: 100%;
    position: absolute;
-   top: 1rem;
-   left: 1rem;
+   top: 0.8rem;
+   left: 0.8rem;
 }
 
-.reward_radio:checked ~ .reward_label .radio_control {
+.noreward_radio:checked ~ .modal_pledges > .pledge_description_container > .reward_label > .radio_control_container {
    border: 0.2rem solid var(--moderate-cyan);
 }
 
-.reward_radio:checked ~ .reward_label .radio_control::before {
+.noreward_radio:checked ~ .modal_pledges > .pledge_description_container > .reward_label > .radio_control_container::before {
    background: var(--moderate-cyan);
 }
 
-.reward_text {
-   padding-left: 5.5rem;
+.reward_text_container {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+   position: relative;
 }
 
+.modal_pledge_days_count {
+   display: flex;
+   align-items: center;
+   gap: 1rem;
+   font-size: 3rem;
+   font-weight: var(--font-weight-700);
+   color: var(--black);
+   padding-bottom: 2rem;
+}
+
+@media (min-width: 767px) {
+   .modal_pledge_days_count {
+      position: absolute;
+      top: -7rem;
+      right: 0;
+   }
+}
+
+.modal_pledge_days_left {
+   font-size: 1.6rem;
+   font-weight: var(--font-weight-500);
+   color: var(--dark-gray);
+}
+
+.reward_text {
+   text-align: justify;
+}
+
+/* ================= pledges amount ================= */
 .pledge_amount_container {
-   /* height: 0; */
-   padding: 4rem 3rem;
    border-top: 0.1rem solid var(--light-gray);
+   transform: scaleY(0%);
+   transition: all 300ms ease-in-out;
+}
+
+.noreward_radio:checked ~ .modal_pledges > .pledge_amount_container {
+   padding: 3rem;
+   transform: scaleY(100%);
+}
+
+.noreward_radio:checked ~ .modal_pledges {
+   border: 0.2rem solid var(--moderate-cyan);
 }
 
 .pledge_form {
+   display: none;
+   flex-direction: column;
+   align-items: center;
+   gap: 2rem; /* between enter_pledge_text & pledge_form_input */
+   width: 100%;
+}
+
+@media (min-width: 700px) {
+   .pledge_form {
+      flex-direction: row;
+      justify-content: space-between;
+   }
+
+   .enter_pledge_text {
+      width: 100%;
+   }
+}
+
+.noreward_radio:checked ~ .modal_pledges > .pledge_amount_container > .pledge_form {
+   display: flex;
+}
+
+.pledge_form_input {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   justify-content: center;
+   gap: 1rem; /* between currency_symbol label & continue button */
+   width: 100%;
+}
+
+@media (min-width: 376px) {
+   .pledge_form_input {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 2rem; /* between currency_symbol label & continue button */
+   }
+}
+
+.amount_label {
    display: flex;
    align-items: center;
-   justify-content: space-between;
+   justify-content: center;
+   gap: 0.5rem;
+
+   font-weight: var(--font-weight-700);
+   border: 0.2rem solid var(--light-gray);
+   border-radius: 3rem;
+   padding: 0.75rem 0rem;
+   /* width: 100%; */
 }
 
-/* mediaa */
-/* @media (min-width: 120px) {
-   .header {
-      padding: 4.5rem 2.5rem 15rem 2.5rem;
-   }
+.continue_btn_container {
+   width: 100%;
 }
 
-@media (min-width: 425px) {
-   .header {
-      padding: 4.5rem 2.5rem 22rem 2.5rem;
-   }
+.continue_btn {
+   width: 100%;
 }
 
-@media (min-width: 768px) {
-   .header {
-      padding: 4.5rem 2.5rem 40rem 2.5rem;
-   }
+.continue_btn:hover {
+   background: var(--dark-cyan);
+   transform: scale(1.015);
+   cursor: pointer;
 }
 
-@media (min-width: 769px) {
-   .header {
-      padding: 0 2.5rem 12rem 2.5rem;
-   }
+.amount_label:focus-within {
+   border: 0.1rem solid var(--moderate-cyan);
 }
 
-@media (min-width: 1440px) {
-   .header {
-      padding: 0 2.5rem 20rem 2.5rem;
-   }
-} */ ;
+.amount_input {
+   display: block;
+   border: none;
+   padding-top: 0.3rem;
+   text-align: left;
+   width: 1rem;
+   font-size: 2rem;
+   font-weight: var(--font-weight-700);
+   caret-color: var(--moderate-cyan);
+   outline: 0;
+   width: 60%;
+}
+
+.amount_input::-webkit-outer-spin-button,
+.amount_input::-webkit-inner-spin-button {
+   -webkit-appearance: none;
+   margin: 0;
+}
+
+/* ================= bamboo stand pledge ================= */
+
+.bamboo_modal_pledges {
+   border: 0.1rem solid var(--light-gray);
+   border-radius: 1rem;
+}
+
+.bamboo_radio:checked ~ .bamboo_modal_pledges {
+   border: 0.2rem solid var(--moderate-cyan);
+}
+
+.bamboo_radio_control_container {
+   width: 3.5rem;
+   height: 3.5rem;
+   border-radius: 100%;
+   border: 0.2rem solid var(--dark-gray);
+   position: absolute;
+}
+
+.reward_label:hover > .bamboo_radio_control_container {
+   border: 0.3rem solid var(--moderate-cyan);
+   cursor: pointer;
+}
+
+.bamboo_radio_control_container::before {
+   content: "";
+   display: block;
+   width: 1.5rem;
+   height: 1.5rem;
+   border-radius: 100%;
+   position: absolute;
+   top: 0.8rem;
+   left: 0.8rem;
+}
+
+.bamboo_radio:checked ~ .bamboo_modal_pledges > .pledge_description_container > .reward_label > .bamboo_radio_control_container {
+   border: 0.2rem solid var(--moderate-cyan);
+}
+
+.bamboo_radio:checked ~ .bamboo_modal_pledges > .pledge_description_container > .reward_label > .bamboo_radio_control_container::before {
+   background: var(--moderate-cyan);
+}
+
+.bamboo_radio:checked ~ .bamboo_modal_pledges > .pledge_amount_container {
+   padding: 3rem;
+   transform: scaleY(100%);
+}
+
+.bamboo_radio:checked ~ .bamboo_modal_pledges > .pledge_amount_container > .pledge_form {
+   display: flex;
+}
+
+/* ================= black edition stand pledge ================= */
+
+.black_modal_pledges {
+   border: 0.1rem solid var(--light-gray);
+   border-radius: 1rem;
+}
+
+.black_radio:checked ~ .black_modal_pledges {
+   border: 0.2rem solid var(--moderate-cyan);
+}
+
+.black_radio_control_container {
+   width: 3.5rem;
+   height: 3.5rem;
+   border-radius: 100%;
+   border: 0.2rem solid var(--dark-gray);
+   position: absolute;
+}
+
+.reward_label:hover > .black_radio_control_container {
+   border: 0.3rem solid var(--moderate-cyan);
+   cursor: pointer;
+}
+
+.black_radio_control_container::before {
+   content: "";
+   display: block;
+   width: 1.5rem;
+   height: 1.5rem;
+   border-radius: 100%;
+   position: absolute;
+   top: 0.8rem;
+   left: 0.8rem;
+}
+
+.black_radio:checked ~ .black_modal_pledges > .pledge_description_container > .reward_label > .black_radio_control_container {
+   border: 0.2rem solid var(--moderate-cyan);
+}
+
+.black_radio:checked ~ .black_modal_pledges > .pledge_description_container > .reward_label > .black_radio_control_container::before {
+   background: var(--moderate-cyan);
+}
+
+.black_radio:checked ~ .black_modal_pledges > .pledge_amount_container {
+   padding: 3rem;
+   transform: scaleY(100%);
+}
+
+.black_radio:checked ~ .black_modal_pledges > .pledge_amount_container > .pledge_form {
+   display: flex;
+}

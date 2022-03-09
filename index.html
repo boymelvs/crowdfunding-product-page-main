@@ -97,7 +97,7 @@
             </div>
 
             <!-- about this project start here -->
-            <section class="about_project">
+            <div class="about_project">
                <div class="about_project_text">
                   <h2 class="about_project_title">About this project</h2>
                   <p class="about_project_details1">
@@ -111,7 +111,7 @@
                </div>
 
                <!-- all pledges menu start here -->
-               <section class="pledges">
+               <div class="pledges">
                   <!-- bamboo pledge -->
                   <div class="stand_pledges bamboo_stand_pledge">
                      <h3 class="plegde_title">
@@ -126,7 +126,9 @@
                            101
                            <span class="pledge_days_left"> left </span>
                         </span>
-                        <button class="select_reward_btn bamboo_reward_btn">Select Reward</button>
+                        <div class="select_btn_container">
+                           <button class="select_reward_btn bamboo_reward_btn">Select Reward</button>
+                        </div>
                      </div>
                   </div>
 
@@ -144,7 +146,9 @@
                            64
                            <span class="pledge_days_left"> left </span>
                         </span>
-                        <button class="select_reward_btn black_edition_reward_btn">Select Reward</button>
+                        <div class="select_btn_container">
+                           <button class="select_reward_btn black_edition_reward_btn">Select Reward</button>
+                        </div>
                      </div>
                   </div>
 
@@ -162,11 +166,13 @@
                            0
                            <span class="pledge_days_left"> left </span>
                         </span>
-                        <button class="select_reward_btn mahogany_reward_btn">Out of Stock</button>
+                        <div class="select_btn_container">
+                           <button class="select_reward_btn mahogany_reward_btn">Out of Stock</button>
+                        </div>
                      </div>
                   </div>
-               </section>
-            </section>
+               </div>
+            </div>
 
             <!-- all about modal start here -->
             <div class="modal_container">
@@ -178,24 +184,32 @@
                   <p class="modal_head_text">Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?</p>
                </div>
 
-               <!-- modal pledge is here -->
+               <!-- modal select pledge start here -->
                <div class="modal_pledges_container">
+                  <!-- no reward pledge -->
+                  <input type="radio" id="no_reward_id" name="select_reward_radio" class="noreward_radio" />
                   <div class="modal_pledges">
-                     <div class="pledge_description_container">
-                        <div class="radio_container">
-                           <input type="radio" id="no_reward_id" name="pledge_noreward_inputname" class="reward_radio noreward_radio" />
+                     <div class="pledge_description_container noreward_pledge_description_container">
+                        <label for="no_reward_id" class="no_reward reward_label">
+                           <div class="radio_control_container">
+                              <!-- <span class="radio_control"> </span> -->
+                           </div>
 
-                           <label for="no_reward_id" class="no_reward reward_label">
-                              <span class="radio_control"> </span>
-
-                              <h3 class="reward_title no_reward_title">Pledge with no reward</h3>
-                           </label>
-                        </div>
+                           <h3 class="reward_title no_reward_title">
+                              <span class="radio_title"> Pledge with no reward </span>
+                              <!-- <span class="pledge_more">Pledge $25 or more</span> -->
+                           </h3>
+                        </label>
 
                         <div class="reward_text_container">
                            <p class="reward_text noreward_text">
                               Choose to support us without a reward if you simply believe in our project. As a backer, you will be signed up to receive product updates via email.
                            </p>
+
+                           <!-- <span class="modal_pledge_days_count">
+                              64
+                              <span class="modal_pledge_days_left"> left </span>
+                           </span> -->
                         </div>
                      </div>
 
@@ -206,9 +220,149 @@
                            <div class="pledge_form_input noreward_form_input">
                               <label for="amount_noreward_id" class="amount_label amount_noreward">
                                  <span class="currecy_symbol">$</span>
-                                 <input type="number" id="amount_noreward_id" name="amount_noreward_inputname class="amount_input" min="1" value="10" required >
+
+                                 <input type="number" id="amount_noreward_id" name="amount_noreward_inputname" class="amount_input" min="1" value="10" required />
                               </label>
-                              <button type="submit" id="submit_noreward" class="select_reward_btn no_reward_btn">Continue</button>
+
+                              <div class="continue_btn_container">
+                                 <button type="submit" id="submit_noreward" class="select_reward_btn continue_btn">Continue</button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+
+                  <!-- bamboo stand pledge -->
+                  <input type="radio" id="bamboo_reward_id" name="select_reward_radio" class="bamboo_radio" />
+
+                  <div class="bamboo_modal_pledges">
+                     <div class="pledge_description_container">
+                        <label for="bamboo_reward_id" class="bamboo_reward reward_label">
+                           <div class="bamboo_radio_control_container"></div>
+
+                           <h3 class="reward_title bamboo_title">
+                              <span class="radio_title"> Bamboo Stand </span>
+                              <span class="pledge_more">Pledge $25 or more</span>
+                           </h3>
+                        </label>
+
+                        <div class="reward_text_container">
+                           <p class="reward_text bamboo_text">
+                              You get an ergonomic stand made of natural bamboo. You've helped us launch our promotional campaign, and you’ll be added to a special Backer member
+                              list.
+                           </p>
+
+                           <span class="modal_pledge_days_count">
+                              101
+                              <span class="modal_pledge_days_left"> left </span>
+                           </span>
+                        </div>
+                     </div>
+
+                     <div class="pledge_amount_container">
+                        <form action="/" class="pledge_form form_bamboo">
+                           <p class="enter_pledge_text">Enter your pledge</p>
+
+                           <div class="pledge_form_input bamboo_form_input">
+                              <label for="amount_bamboo_id" class="amount_label amount_bamboo">
+                                 <span class="currecy_symbol">$</span>
+
+                                 <input type="number" id="amount_bamboo_id" name="amount_bamboo_inputname" class="amount_input" min="1" value="25" required />
+                              </label>
+
+                              <div class="continue_btn_container">
+                                 <button type="submit" id="submit_bamboo" class="select_reward_btn continue_btn">Continue</button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+
+                  <!-- black edition  pledge -->
+                  <input type="radio" id="black_reward_id" name="select_reward_radio" class="black_radio" />
+
+                  <div class="black_modal_pledges">
+                     <div class="pledge_description_container">
+                        <label for="black_reward_id" class="black_reward reward_label">
+                           <div class="black_radio_control_container"></div>
+
+                           <h3 class="reward_title black_title">
+                              <span class="radio_title"> Black Edition Stand </span>
+                              <span class="pledge_more">Pledge $75 or more</span>
+                           </h3>
+                        </label>
+
+                        <div class="reward_text_container">
+                           <p class="reward_text black_text">
+                              You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer member list. Shipping is included.
+                           </p>
+
+                           <span class="modal_pledge_days_count">
+                              64
+                              <span class="modal_pledge_days_left"> left </span>
+                           </span>
+                        </div>
+                     </div>
+
+                     <div class="pledge_amount_container">
+                        <form action="/" class="pledge_form form_black">
+                           <p class="enter_pledge_text">Enter your pledge</p>
+
+                           <div class="pledge_form_input black_form_input">
+                              <label for="amount_black_id" class="amount_label amount_black">
+                                 <span class="currecy_symbol">$</span>
+
+                                 <input type="number" id="amount_black_id" name="amount_black_inputname" class="amount_input" min="1" value="75" required />
+                              </label>
+
+                              <div class="continue_btn_container">
+                                 <button type="submit" id="submit_black" class="select_reward_btn continue_btn">Continue</button>
+                              </div>
+                           </div>
+                        </form>
+                     </div>
+                  </div>
+
+                  <!-- mahogany special edition pledge -->
+                  <input type="radio" id="mahogany_reward_id" name="select_reward_radio" class="mahogany_radio" />
+
+                  <div class="mahogany_modal_pledges">
+                     <div class="pledge_description_container">
+                        <label for="mahogany_reward_id" class="mahogany_reward reward_label">
+                           <div class="mahogany_radio_control_container"></div>
+
+                           <h3 class="reward_title mahogany_title">
+                              <span class="radio_title"> Black Edition Stand </span>
+                              <span class="pledge_more">Pledge $75 or more</span>
+                           </h3>
+                        </label>
+
+                        <div class="reward_text_container">
+                           <p class="reward_text mahogany_text">
+                              You get a Black Special Edition computer stand and a personal thank you. You’ll be added to our Backer member list. Shipping is included.
+                           </p>
+
+                           <span class="modal_pledge_days_count">
+                              64
+                              <span class="modal_pledge_days_left"> left </span>
+                           </span>
+                        </div>
+                     </div>
+
+                     <div class="pledge_amount_container">
+                        <form action="/" class="pledge_form form_mahogany">
+                           <p class="enter_pledge_text">Enter your pledge</p>
+
+                           <div class="pledge_form_input mahogany_form_input">
+                              <label for="amount_black_id" class="amount_label amount_mahogany">
+                                 <span class="currecy_symbol">$</span>
+
+                                 <input type="number" id="amount_black_id" name="amount_black_inputname" class="amount_input" min="1" value="75" required />
+                              </label>
+
+                              <div class="continue_btn_container">
+                                 <button type="submit" id="submit_mahogany" class="select_reward_btn continue_btn">Continue</button>
+                              </div>
                            </div>
                         </form>
                      </div>
@@ -230,8 +384,7 @@
 
       <!-- Selection modal start -->
 
-      <!--     Bamboo Stand Pledge $25 or more You get an ergonomic stand made of natural
-      bamboo. You've helped us launch our promotional campaign, and you’ll be added to a special Backer member list. 101 left -->
+      <!--      $25 or more  101 left -->
 
       <!-- Selected pledge start -->
       <!-- Enter your pledge $25 Continue -->
