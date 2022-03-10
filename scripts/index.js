@@ -42,7 +42,7 @@ const radioReset = (element) => {
 /* provide listening for click */
 const clickAction = (action, element, overlay, optional) => {
    /* stop scrolling the body */
-   const bodyStopScrolling = document.querySelector(".bodyStopScrolling");
+   const bodyStopScrolling = document.getElementById("bodyStopScrolling");
 
    action.addEventListener("click", (e) => {
       e.preventDefault();
@@ -120,3 +120,12 @@ listenForClick(continueBtns, successModal, overlay);
 /*get  got it button to close success modal */
 const gotItBtn = document.querySelector(".got_it_btn");
 listenForClick(gotItBtn, successModal, overlay);
+
+/* ================= all about arrow up ================= */
+/* get up_arrow */
+const arrowUP = document.querySelector(".scroll_up");
+
+/* listening when to show up_arrow */
+window.addEventListener("scroll", () => {
+   window.pageYOffset > 750 ? arrowUP.classList.add("active") : arrowUP.classList.remove("active");
+});

@@ -88,6 +88,10 @@ footer {
    text-align: center;
 }
 
+footer a {
+   text-decoration: none;
+}
+
 /* ================= ================= ================= ================= */
 /*                   header start here mobile first                        */
 /* ================= ================= ================= ================= */
@@ -785,10 +789,49 @@ footer {
 @keyframes fadeOut {
    0% {
       opacity: 1;
-      /* transform: translateY(0); */
+      transform: translateY(0);
    }
    100% {
       opacity: 0;
       transform: translateY(6rem);
    }
+}
+
+/* ================= all about scroll up arrow ================= */
+.scroll_up {
+   display: none;
+   position: fixed;
+   bottom: 4rem;
+   right: 1.5rem;
+   z-index: 999;
+}
+
+.scroll_up.active {
+   display: block;
+}
+
+.arrowUp {
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+   color: var(--moderate-cyan);
+   font-size: 2rem;
+   font-weight: var(--font-weight-500);
+}
+
+.arrowUp:hover {
+   cursor: pointer;
+   transform: scale(1.2);
+}
+
+.arrow_head {
+   border: 2.5rem solid transparent;
+   border-top: 0;
+   border-bottom: 2.5rem solid var(--moderate-cyan);
+}
+
+.arrow_base {
+   height: 1.5rem;
+   width: 2rem;
+   background: var(--moderate-cyan);
 }

@@ -2,7 +2,7 @@
 /*                   all about modal start                                 */
 /* ================= ================= ================= ================= */
 
-.bodyStopScrolling.active {
+#bodyStopScrolling.active {
    overflow: hidden; /* stop body to scroll while modal is open */
 }
 
