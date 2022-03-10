@@ -1,0 +1,104 @@
+/* ================= all about success modal ================= */
+
+.success_modal_main_container {
+   display: none;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   gap: 3rem; /* between modal_header & modal_pledges_container */
+   padding: 5rem 3rem;
+   background: transparent;
+   width: 100%;
+   min-height: 100vh;
+
+   position: fixed;
+   top: 0;
+   left: 0;
+
+   visibility: hidden;
+   transition: all 300ms ease-in-out;
+   caret-color: transparent; /* cursor blinking hide */
+}
+
+/* add show & active classes using javascript start here */
+.success_modal_main_container.show {
+   display: flex; /* show modal */
+   z-index: 3;
+   animation: fadeOut 300ms ease-in-out;
+}
+
+.success_modal_main_container.active {
+   visibility: visible;
+   animation: fadeIn 300ms ease-in-out;
+} /* add show & active classes using javascript end here */
+
+.success_modal_container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   background: var(--white);
+   border-radius: 1rem;
+   width: 100%;
+}
+
+@media (min-width: 768px) {
+   .success_modal_container {
+      width: 50rem;
+   }
+}
+
+@media (min-width: 1024px) {
+   .success_modal_container {
+      width: 55rem;
+   }
+}
+
+.success_modal {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   gap: 4rem;
+   width: 60rem;
+   height: 45rem;
+   padding: 0 3rem;
+   /* border: 0.1rem solid red; */
+}
+
+.check_container {
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   width: 100%;
+}
+
+.success_modal_description {
+   display: flex;
+   flex-direction: column;
+   gap: 3rem;
+   text-align: center;
+   width: 100%;
+}
+
+.success_modal_title {
+   font-weight: var(--font-weight-700);
+   color: var(--black);
+}
+
+.success_modal_text {
+   line-height: 2.75rem;
+}
+
+.got_it_btn_container {
+   width: 13rem;
+}
+
+.got_it_btn {
+   width: 100%;
+}
+
+.got_it_btn:hover {
+   background: var(--dark-cyan);
+   transform: scale(1.015);
+   cursor: pointer;
+}

@@ -1,14 +1,20 @@
 "use strict";
 
-/* add/remove show & active classes */
+/* provide switching like bookmark slide, overlay etc by add/remove active claass */
+const toggle = (value) => {
+   value.classList.contains("active") ? value.classList.remove("active") : value.classList.add("active");
+};
+
+/* add/remove show  */
 const addRemoveClasses = (value) => {
    if (value.classList.contains("show")) {
-      value.classList.remove("active");
+      /* removing classes */
+      toggle(value);
 
       /* time delay for removing show classes */
       setTimeout(() => {
          value.classList.remove("show");
-      }, 600);
+      }, 300);
 
       /* adding classes */
    } else {
@@ -16,18 +22,12 @@ const addRemoveClasses = (value) => {
 
       /* time delay for adding active classes */
       setTimeout(() => {
-         value.classList.add("active");
+         toggle(value);
       }, 0.1);
    }
 };
 
-/* provide switching like bookmark slide, overlay */
-const toggle = (value) => {
-   // value.classList.toggle("show");
-   value.classList.toggle("active");
-};
-
-/* provide looping for multiple elements like burger_line, bookmark_slide */
+/* provide looping to bookmark_slide button */
 const selectEachELement = (elements) => {
    elements.length > 1
       ? elements.forEach((element) => {
@@ -58,57 +58,43 @@ const clickSlider = (bookmarks) => {
    });
 };
 
+/* provide single element listening  */
+const singleClick = (toClick, element, overlay) => {
+   toClick.addEventListener("click", (e) => {
+      e.preventDefault();
+      addRemoveClasses(element);
+      toggle(overlay);
+   });
+};
+
 /* get the overlay */
 const overlay = document.querySelector(".overlay");
 
-/* get burger element & nav list */
+/* ================= get burger element & nav list ================= */
 const burger = document.querySelector(".burger_menu");
 const burgerLines = document.querySelectorAll(".burger_line");
 const navList = document.querySelector(".nav_list");
-
 clickBurger(burger, burgerLines, navList, overlay);
 
 /* get bookmark to slide */
 const bookmarks = document.querySelectorAll(".bookmark_slide");
 clickSlider(bookmarks);
 
-/* get all about modal */
+/* ================= all about modal ================= */
 const modalMainContainer = document.querySelector(".modal_main_container");
 
-const modalClose = document.querySelector(".modal_close_btn");
-modalClose.addEventListener("click", () => {
-   /* close modal */
-   addRemoveClasses(modalMainContainer);
-   /* close overlay */
-   toggle(overlay);
-});
-
-/* back this project button */
+/* get back this project button to open modal */
 const backBtn = document.querySelector(".back_btn");
-backBtn.addEventListener("click", (e) => {
-   e.preventDefault();
-   /* open modal */
-   addRemoveClasses(modalMainContainer);
-   /* opem overlay */
-   toggle(overlay);
-});
+singleClick(backBtn, modalMainContainer, overlay);
 
-/* success modal */
-const successModal = document.querySelector(".success_modal_main_container");
-
-/* got it button */
-const gotItBtn = document.querySelector(".got_it_btn");
-gotItBtn.addEventListener("click", () => {
-   /* close success modal */
-   addRemoveClasses(successModal);
-
-   /* opem overlay */
-   toggle(overlay);
-});
+/* get x button to close modal */
+const mainModalClose = document.querySelector(".main_modal_close_btn");
+const modalClose = document.querySelector(".modal_close");
+singleClick(mainModalClose, modalMainContainer, overlay);
+singleClick(modalClose, modalMainContainer, overlay);
 
 /* get modal continue button */
-const continueBtns = document.querySelectorAll(".continue_btn");
-
+const continueBtns = document.querySelectorAll(".continue_btn_container");
 continueBtns.forEach((continueBtn) => {
    continueBtn.addEventListener("click", (e) => {
       e.preventDefault();
@@ -118,4 +104,18 @@ continueBtns.forEach((continueBtn) => {
       /* open success modal */
       addRemoveClasses(successModal);
    });
+});
+
+/* ================= all about success modal ================= */
+const successModal = document.querySelector(".success_modal_main_container");
+
+/*get  got it button to close success modal */
+const gotItBtn = document.querySelector(".got_it_btn");
+singleClick(gotItBtn, successModal, overlay);
+
+/* ================= all about this project button ================= */
+const selectRewardBtns = document.querySelectorAll(".select_btn_container");
+selectRewardBtns.forEach((selectRewardBtn) => {
+   /* open modal */
+   singleClick(selectRewardBtn, modalMainContainer, overlay);
 });

@@ -10,6 +10,8 @@
       <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png" />
 
       <link rel="stylesheet" href="./styles/styles.css" />
+      <link rel="stylesheet" href="./styles/modal.css" />
+      <link rel="stylesheet" href="./styles/success-modal.css" />
 
       <title>Frontend Mentor | Crowdfunding product page</title>
    </head>
@@ -110,9 +112,9 @@
                   </p>
                </div>
 
-               <!-- all pledges menu start here -->
+               <!-- all pledges menu start here about this project -->
                <div class="pledges">
-                  <!-- bamboo pledge -->
+                  <!-- bamboo pledge about this project -->
                   <div class="stand_pledges bamboo_stand_pledge">
                      <h3 class="plegde_title">
                         Bamboo Stand
@@ -132,7 +134,7 @@
                      </div>
                   </div>
 
-                  <!-- black edition pledge -->
+                  <!-- black edition pledge about this project -->
                   <div class="stand_pledges black_edition_stand_pledge">
                      <h3 class="plegde_title">
                         Black Edition Stand
@@ -152,7 +154,7 @@
                      </div>
                   </div>
 
-                  <!-- Mahogany Special Edition -->
+                  <!-- Mahogany Special Edition about this project -->
                   <div class="stand_pledges mahogany_edition_stand_pledge">
                      <h3 class="plegde_title">
                         Mahogany Special Edition
@@ -176,11 +178,13 @@
 
             <!-- all about modal start here -->
             <div class="modal_main_container">
+               <button class="modal_close_btn main_modal_close_btn">x</button>
                <div class="modal_container">
                   <div class="modal_header">
                      <h2 class="modal_head">
-                        Back this project
-                        <button class="modal_close_btn">x</button>
+                        <div>Back this project</div>
+
+                        <button class="modal_close_btn modal_close">x</button>
                      </h2>
                      <p class="modal_head_text">Want to support us in bringing Mastercraft Bamboo Monitor Riser out in the world?</p>
                   </div>
@@ -190,7 +194,7 @@
                      <!-- no reward pledge radio -->
                      <input type="radio" id="no_reward_id" name="select_reward_radio" class="noreward_radio" />
 
-                     <!-- no reward pledge -->
+                     <!-- no reward pledge modal -->
                      <div class="modal_pledges">
                         <div class="pledge_description_container noreward_pledge_description_container">
                            <label for="no_reward_id" class="no_reward reward_label">
@@ -228,10 +232,10 @@
                         </div>
                      </div>
 
-                     <!-- bamboo stand pledge radio -->
+                     <!-- bamboo stand pledge radio modal -->
                      <input type="radio" id="bamboo_reward_id" name="select_reward_radio" class="bamboo_radio" />
 
-                     <!-- bamboo stand pledge -->
+                     <!-- bamboo stand pledge modal -->
                      <div class="bamboo_modal_pledges">
                         <div class="pledge_description_container">
                            <label for="bamboo_reward_id" class="bamboo_reward reward_label">
@@ -275,10 +279,10 @@
                         </div>
                      </div>
 
-                     <!-- black edition  pledge radio -->
+                     <!-- black edition  pledge radio modal -->
                      <input type="radio" id="black_reward_id" name="select_reward_radio" class="black_radio" />
 
-                     <!-- black edition  pledge -->
+                     <!-- black edition  pledge modal -->
                      <div class="black_modal_pledges">
                         <div class="pledge_description_container">
                            <label for="black_reward_id" class="black_reward reward_label">
@@ -321,10 +325,10 @@
                         </div>
                      </div>
 
-                     <!-- mahogany special edition pledge radio -->
+                     <!-- mahogany special edition pledge radio modal -->
                      <input type="radio" id="mahogany_reward_id" name="select_reward_radio" class="mahogany_radio" disabled />
 
-                     <!-- mahogany special edition pledge -->
+                     <!-- mahogany special edition pledge modal -->
                      <div class="mahogany_modal_pledges">
                         <div class="pledge_description_container">
                            <label for="mahogany_reward_id" class="mahogany_reward_label reward_label">
