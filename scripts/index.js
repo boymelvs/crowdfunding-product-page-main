@@ -28,19 +28,19 @@ const addRemoveClasses = (elem) => {
 };
 
 /* ================= radio button ================= */
-const radioReset = (element) => {
+const radioReset = (element, clickKey) => {
    const radios = document.querySelectorAll('input[type="radio"]');
-   radios.forEach((radio) => {
+   radios.forEach((radio, radioKey) => {
       if (element.classList.contains("got_it_btn") || element.classList.contains("back_btn")) {
          radio.checked = false;
-      } else if (element.classList.contains("select_reward_btn")) {
+      } else if (radioKey === clickKey + 1) {
          radio.checked = true;
       }
    });
 };
 
 /* provide listening for click */
-const clickAction = (action, element, overlay, optional) => {
+const clickAction = (action, element, overlay, optional, clickKey = "") => {
    /* stop scrolling the body */
    const bodyStopScrolling = document.getElementById("bodyStopScrolling");
 
@@ -51,7 +51,6 @@ const clickAction = (action, element, overlay, optional) => {
          /* all about bookmark slide & burger */
          element.forEach((el) => {
             action.classList.contains("burger_menu") ? addRemoveClasses(el) : toggle(el);
-            console.log("this test2", el);
          });
 
          action.classList.contains("burger_menu") ? addRemoveClasses(optional) : toggle(optional);
@@ -59,8 +58,9 @@ const clickAction = (action, element, overlay, optional) => {
          /* other buttons such as select reward, continue, close etc */
       } else {
          toggle(bodyStopScrolling);
-         radioReset(action);
+         radioReset(action, clickKey);
          addRemoveClasses(element);
+         console.log("this test1", action);
       }
 
       toggle(overlay);
@@ -70,8 +70,8 @@ const clickAction = (action, element, overlay, optional) => {
 /* provide looping single & multiple button  */
 const listenForClick = (toClick, element, overlay, optional = "") => {
    if (toClick.length > 1) {
-      toClick.forEach((clicked) => {
-         clickAction(clicked, element, overlay, optional);
+      toClick.forEach((clicked, clickKey) => {
+         clickAction(clicked, element, overlay, optional, clickKey);
       });
    } else {
       clickAction(toClick, element, overlay, optional);
@@ -106,12 +106,14 @@ const modalClose = document.querySelector(".modal_close");
 listenForClick(mainModalClose, modalMainContainer, overlay);
 listenForClick(modalClose, modalMainContainer, overlay);
 
-/* get modal "continue" button */
+/* get modal "continue" & "select" button */
 const continueBtns = document.querySelectorAll(".continue_btn");
-// listenForClick(continueBtns, modalMainContainer, overlay);
-
 const selectRewardBtns = document.querySelectorAll(".select_reward_btn");
 listenForClick(selectRewardBtns, modalMainContainer, overlay);
+
+// const radios = document.querySelectorAll('input[type="radio"]');
+// console.log("this select", selectRewardBtns);
+// console.log("this radio", radios);
 
 /* ================= all about success modal ================= */
 const successModal = document.querySelector(".success_modal_main_container");
