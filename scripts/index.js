@@ -41,6 +41,9 @@ const radioReset = (element) => {
 
 /* provide listening for click */
 const clickAction = (action, element, overlay, optional) => {
+   /* stop scrolling the body */
+   const bodyStopScrolling = document.querySelector(".bodyStopScrolling");
+
    action.addEventListener("click", (e) => {
       e.preventDefault();
 
@@ -55,15 +58,12 @@ const clickAction = (action, element, overlay, optional) => {
 
          /* other buttons such as select reward, continue, close etc */
       } else {
-         // radioReset(action);
+         toggle(bodyStopScrolling);
+         radioReset(action);
          addRemoveClasses(element);
       }
 
       toggle(overlay);
-
-      /* stop scrolling the body */
-      const bodyStopScrolling = document.querySelector(".bodyStopScrolling");
-      toggle(bodyStopScrolling);
    });
 };
 
