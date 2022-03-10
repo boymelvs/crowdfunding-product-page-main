@@ -739,7 +739,8 @@ footer {
    color: var(--dark-gray);
 }
 
-.select_reward_btn {
+.select_reward_btn,
+.got_it_btn {
    padding: 1.5rem 3.5rem;
    border: none;
    border-radius: 3rem;

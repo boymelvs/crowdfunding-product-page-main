@@ -2,6 +2,10 @@
 /*                   all about modal start                                 */
 /* ================= ================= ================= ================= */
 
+.bodyStopScrolling.active {
+   overflow: hidden; /* stop body to scroll while modal is open */
+}
+
 .modal_main_container {
    display: none;
    align-items: center;
@@ -48,7 +52,6 @@
 @media (min-width: 768px) {
    .modal_container {
       width: 60rem;
-      padding: 5rem 3rem 10rem 3rem;
    }
 }
 

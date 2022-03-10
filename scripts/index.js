@@ -1,40 +1,42 @@
 "use strict";
 
 /* provide switching like bookmark slide, overlay etc by add/remove active claass */
-const toggle = (value) => {
-   value.classList.contains("active") ? value.classList.remove("active") : value.classList.add("active");
+const toggle = (elem) => {
+   elem.classList.contains("active") ? elem.classList.remove("active") : elem.classList.add("active");
 };
 
 /* add/remove show classes to display element */
-const addRemoveClasses = (value) => {
-   if (value.classList.contains("show")) {
+const addRemoveClasses = (elem) => {
+   if (elem.classList.contains("show")) {
       /* removing classes */
-      toggle(value);
+      toggle(elem);
 
       /* time delay for removing show classes */
       setTimeout(() => {
-         value.classList.remove("show");
+         elem.classList.remove("show");
       }, 300);
 
       /* adding classes */
    } else {
-      value.classList.add("show");
+      elem.classList.add("show");
 
       /* time delay for adding active classes */
       setTimeout(() => {
-         toggle(value);
+         toggle(elem);
       }, 0.1);
    }
 };
 
 /* ================= radio button ================= */
 const radioReset = (element) => {
-   if (element.classList.contains("got_it_btn") || element.classList.contains("back_btn")) {
-      const radios = document.querySelectorAll('input[type="radio"]');
-      radios.forEach((radio) => {
+   const radios = document.querySelectorAll('input[type="radio"]');
+   radios.forEach((radio) => {
+      if (element.classList.contains("got_it_btn") || element.classList.contains("back_btn")) {
          radio.checked = false;
-      });
-   }
+      } else if (element.classList.contains("select_reward_btn")) {
+         radio.checked = true;
+      }
+   });
 };
 
 /* provide listening for click */
@@ -46,17 +48,22 @@ const clickAction = (action, element, overlay, optional) => {
          /* all about bookmark slide & burger */
          element.forEach((el) => {
             action.classList.contains("burger_menu") ? addRemoveClasses(el) : toggle(el);
+            console.log("this test2", el);
          });
 
          action.classList.contains("burger_menu") ? addRemoveClasses(optional) : toggle(optional);
 
-         /* other buttons such as continue, close etc */
+         /* other buttons such as select reward, continue, close etc */
       } else {
-         radioReset(action);
+         // radioReset(action);
          addRemoveClasses(element);
       }
 
       toggle(overlay);
+
+      /* stop scrolling the body */
+      const bodyStopScrolling = document.querySelector(".bodyStopScrolling");
+      toggle(bodyStopScrolling);
    });
 };
 
@@ -101,7 +108,10 @@ listenForClick(modalClose, modalMainContainer, overlay);
 
 /* get modal "continue" button */
 const continueBtns = document.querySelectorAll(".continue_btn");
-listenForClick(continueBtns, modalMainContainer, overlay);
+// listenForClick(continueBtns, modalMainContainer, overlay);
+
+const selectRewardBtns = document.querySelectorAll(".select_reward_btn");
+listenForClick(selectRewardBtns, modalMainContainer, overlay);
 
 /* ================= all about success modal ================= */
 const successModal = document.querySelector(".success_modal_main_container");
@@ -110,8 +120,3 @@ listenForClick(continueBtns, successModal, overlay);
 /*get  got it button to close success modal */
 const gotItBtn = document.querySelector(".got_it_btn");
 listenForClick(gotItBtn, successModal, overlay);
-
-/* ================= all about "select reward" button ================= */
-/* get "select reward" button */
-const selectRewardBtns = document.querySelectorAll(".select_btn_container");
-listenForClick(selectRewardBtns, modalMainContainer, overlay);
