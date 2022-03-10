@@ -30,7 +30,7 @@ Users should be able to:
 
 ### Screenshot
 
-![Crowdfunding product page solution](./design/desktop-design.png)
+![Crowdfunding product page solution](./design/desktop-design.jpg)
 
 ### Links
 
