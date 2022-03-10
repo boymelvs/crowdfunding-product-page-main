@@ -5,7 +5,7 @@ const toggle = (value) => {
    value.classList.contains("active") ? value.classList.remove("active") : value.classList.add("active");
 };
 
-/* add/remove show  */
+/* add/remove show classes to display element */
 const addRemoveClasses = (value) => {
    if (value.classList.contains("show")) {
       /* removing classes */
@@ -27,44 +27,48 @@ const addRemoveClasses = (value) => {
    }
 };
 
-/* provide looping to bookmark_slide button */
-const selectEachELement = (elements) => {
-   elements.length > 1
-      ? elements.forEach((element) => {
-           element.classList.contains("bookmark_slide") ? toggle(element) : addRemoveClasses(element);
-        })
-      : addRemoveClasses(elements);
-};
-
-/* if burger is click run this function */
-const clickBurger = (burger, burgerLines, navList, overlay) => {
-   burger.addEventListener("click", () => {
-      selectEachELement(burgerLines);
-      addRemoveClasses(navList);
-      toggle(overlay);
-   });
-};
-
-/* if bookmark is click run this function */
-const clickSlider = (bookmarks) => {
-   const bookmarkText = document.querySelector(".bookmark_text");
-   const bookmarkEd = document.querySelector(".ed");
-   bookmarks.forEach((bookmark) => {
-      bookmark.addEventListener("click", () => {
-         selectEachELement(bookmarks);
-         toggle(bookmarkText);
-         toggle(bookmarkEd);
+/* ================= radio button ================= */
+const radioReset = (element) => {
+   if (element.classList.contains("got_it_btn") || element.classList.contains("back_btn")) {
+      const radios = document.querySelectorAll('input[type="radio"]');
+      radios.forEach((radio) => {
+         radio.checked = false;
       });
+   }
+};
+
+/* provide listening for click */
+const clickAction = (action, element, overlay, optional) => {
+   action.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      if (action.classList.contains("bookmark_slide") || action.classList.contains("burger_menu")) {
+         /* all about bookmark slide & burger */
+         element.forEach((el) => {
+            action.classList.contains("burger_menu") ? addRemoveClasses(el) : toggle(el);
+         });
+
+         action.classList.contains("burger_menu") ? addRemoveClasses(optional) : toggle(optional);
+
+         /* other buttons such as continue, close etc */
+      } else {
+         radioReset(action);
+         addRemoveClasses(element);
+      }
+
+      toggle(overlay);
    });
 };
 
-/* provide single element listening  */
-const singleClick = (toClick, element, overlay) => {
-   toClick.addEventListener("click", (e) => {
-      e.preventDefault();
-      addRemoveClasses(element);
-      toggle(overlay);
-   });
+/* provide looping single & multiple button  */
+const listenForClick = (toClick, element, overlay, optional = "") => {
+   if (toClick.length > 1) {
+      toClick.forEach((clicked) => {
+         clickAction(clicked, element, overlay, optional);
+      });
+   } else {
+      clickAction(toClick, element, overlay, optional);
+   }
 };
 
 /* get the overlay */
@@ -74,48 +78,40 @@ const overlay = document.querySelector(".overlay");
 const burger = document.querySelector(".burger_menu");
 const burgerLines = document.querySelectorAll(".burger_line");
 const navList = document.querySelector(".nav_list");
-clickBurger(burger, burgerLines, navList, overlay);
+listenForClick(burger, burgerLines, overlay, navList);
 
-/* get bookmark to slide */
+/* ================= get bookmark to slide ================= */
 const bookmarks = document.querySelectorAll(".bookmark_slide");
-clickSlider(bookmarks);
+const bookmarkText = document.querySelector(".bookmark_text");
+const bookmarkEd = document.querySelector(".ed");
+listenForClick(bookmarks, bookmarks, bookmarkText, bookmarkEd);
 
 /* ================= all about modal ================= */
 const modalMainContainer = document.querySelector(".modal_main_container");
 
-/* get back this project button to open modal */
+/* get "back this project" button to open modal */
 const backBtn = document.querySelector(".back_btn");
-singleClick(backBtn, modalMainContainer, overlay);
+listenForClick(backBtn, modalMainContainer, overlay);
 
 /* get x button to close modal */
 const mainModalClose = document.querySelector(".main_modal_close_btn");
 const modalClose = document.querySelector(".modal_close");
-singleClick(mainModalClose, modalMainContainer, overlay);
-singleClick(modalClose, modalMainContainer, overlay);
+listenForClick(mainModalClose, modalMainContainer, overlay);
+listenForClick(modalClose, modalMainContainer, overlay);
 
-/* get modal continue button */
-const continueBtns = document.querySelectorAll(".continue_btn_container");
-continueBtns.forEach((continueBtn) => {
-   continueBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      /* close modal */
-      addRemoveClasses(modalMainContainer);
-
-      /* open success modal */
-      addRemoveClasses(successModal);
-   });
-});
+/* get modal "continue" button */
+const continueBtns = document.querySelectorAll(".continue_btn");
+listenForClick(continueBtns, modalMainContainer, overlay);
 
 /* ================= all about success modal ================= */
 const successModal = document.querySelector(".success_modal_main_container");
+listenForClick(continueBtns, successModal, overlay);
 
 /*get  got it button to close success modal */
 const gotItBtn = document.querySelector(".got_it_btn");
-singleClick(gotItBtn, successModal, overlay);
+listenForClick(gotItBtn, successModal, overlay);
 
-/* ================= all about this project button ================= */
+/* ================= all about "select reward" button ================= */
+/* get "select reward" button */
 const selectRewardBtns = document.querySelectorAll(".select_btn_container");
-selectRewardBtns.forEach((selectRewardBtn) => {
-   /* open modal */
-   singleClick(selectRewardBtn, modalMainContainer, overlay);
-});
+listenForClick(selectRewardBtns, modalMainContainer, overlay);
