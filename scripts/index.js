@@ -60,7 +60,6 @@ const clickAction = (action, element, overlay, optional, clickKey = "") => {
          toggle(bodyStopScrolling);
          radioReset(action, clickKey);
          addRemoveClasses(element);
-         console.log("this test1", action);
       }
 
       toggle(overlay);
@@ -111,10 +110,6 @@ const continueBtns = document.querySelectorAll(".continue_btn");
 const selectRewardBtns = document.querySelectorAll(".select_reward_btn");
 listenForClick(selectRewardBtns, modalMainContainer, overlay);
 
-// const radios = document.querySelectorAll('input[type="radio"]');
-// console.log("this select", selectRewardBtns);
-// console.log("this radio", radios);
-
 /* ================= all about success modal ================= */
 const successModal = document.querySelector(".success_modal_main_container");
 listenForClick(continueBtns, successModal, overlay);
@@ -131,3 +126,56 @@ const arrowUP = document.querySelector(".scroll_up");
 window.addEventListener("scroll", () => {
    window.pageYOffset > 750 ? arrowUP.classList.add("active") : arrowUP.classList.remove("active");
 });
+
+/* get statistics */
+const statTotals = document.querySelectorAll(".stat_total");
+const numDaysLefts = document.querySelectorAll(".num_days_left");
+const pledgeForms = document.querySelectorAll(".pledge_form");
+const amountInputs = document.querySelectorAll(".amount_input");
+const progressBar = document.querySelector(".progress_bar");
+
+const updatePledges = (statTotals, numDaysLefts, amountInputs) => {
+   let goalAmount = 100000;
+   let backedAmounts;
+   let totalAmountsEl;
+   let totalBackers;
+   let totalBackersEl;
+   let remainingDays;
+   let amountPledge;
+   let progressBarLength;
+
+   statTotals.forEach((statTotal) => {
+      if (statTotal.classList.contains("total_backed")) {
+         backedAmounts = Number(statTotal.textContent.slice(1).replace(/,/g, ""));
+
+         totalAmountsEl = statTotal;
+      } else {
+         totalBackers = Number(statTotal.textContent.replace(/,/g, ""));
+         totalBackersEl = statTotal;
+      }
+   });
+
+   numDaysLefts.forEach((numDaysLeft) => {
+      if (numDaysLeft.classList.contains("bamboo_num_days_left")) {
+         remainingDays = Number(numDaysLeft.firstChild.textContent) - 1;
+         numDaysLeft.innerHTML = remainingDays;
+      }
+
+      if (numDaysLeft.classList.contains("black_num_days_left")) {
+         remainingDays = Number(numDaysLeft.firstChild.textContent) - 1;
+         numDaysLeft.innerHTML = remainingDays;
+      }
+   });
+
+   amountInputs.forEach((amountInput) => {
+      console.log("this amountInput", typeof amountInput.value);
+   });
+
+   totalBackersEl.innerHTML = `${totalBackers.toLocaleString()}`;
+   totalAmountsEl.innerHTML = "$" + `${backedAmounts.toLocaleString()}`;
+
+   progressBarLength = Math.floor((backedAmounts / goalAmount) * 100);
+   progressBar.style.width = `${progressBarLength}%`;
+};
+
+updatePledges(statTotals, numDaysLefts, amountInputs);

@@ -575,7 +575,8 @@ footer a {
    gap: 0.5rem; /* between total & stat_details */
 }
 
-.total {
+.stat_total,
+.stat_days_left {
    font-size: 3.5rem;
    font-weight: var(--font-weight-700);
    color: var(--black);
@@ -621,7 +622,7 @@ footer a {
 }
 
 .progress_bar {
-   width: 80%;
+   width: 50%;
    background: var(--moderate-cyan);
 }
 
