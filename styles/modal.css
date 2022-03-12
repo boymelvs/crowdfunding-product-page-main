@@ -285,6 +285,11 @@ input[type="radio"] {
    width: 100%;
 }
 
+.enter_pledge_text {
+   font-weight: 500;
+   padding-bottom: 1.5rem;
+}
+
 @media (min-width: 700px) {
    .pledge_form {
       flex-direction: row;
@@ -293,6 +298,7 @@ input[type="radio"] {
 
    .enter_pledge_text {
       width: 100%;
+      padding: 0;
    }
 }
 
@@ -307,6 +313,21 @@ input[type="radio"] {
    justify-content: center;
    gap: 1rem; /* between currency_symbol label & continue button */
    width: 100%;
+
+   position: relative;
+}
+
+.warning {
+   display: none;
+   position: absolute;
+   top: -2rem;
+   font-size: 1.4rem;
+   color: var(--red);
+}
+
+/* add active classes using javascript */
+.warning.active {
+   display: block;
 }
 
 @media (min-width: 376px) {
@@ -327,7 +348,11 @@ input[type="radio"] {
    border: 0.2rem solid var(--light-gray);
    border-radius: 3rem;
    padding: 0.75rem 0rem;
-   /* width: 100%; */
+}
+
+/* add active classes using javascript */
+.amount_label.active {
+   border: 0.2rem solid var(--red);
 }
 
 .continue_btn_container {
@@ -342,10 +367,6 @@ input[type="radio"] {
    background: var(--dark-cyan);
    transform: scale(1.015);
    cursor: pointer;
-}
-
-.amount_label:focus-within {
-   border: 0.1rem solid var(--moderate-cyan);
 }
 
 .amount_input {

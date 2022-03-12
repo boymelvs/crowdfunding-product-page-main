@@ -27,12 +27,24 @@ const addRemoveClasses = (elem) => {
    }
 };
 
+/* ================= form reset ================= */
+const forms = document.querySelectorAll(".pledge_form");
+const formReset = () => {
+   forms.forEach((form) => {
+      form.reset();
+   });
+};
+
 /* ================= radio button ================= */
 const radioReset = (element, clickKey) => {
    const radios = document.querySelectorAll('input[type="radio"]');
+   const forms = document.querySelectorAll("pledge_form");
+
    radios.forEach((radio, radioKey) => {
-      if (element.classList.contains("got_it_btn") || element.classList.contains("back_btn")) {
+      if (element.classList.contains("got_it_btn") || element.classList.contains("back_btn") || element.classList.contains("modal_close_btn")) {
          radio.checked = false;
+
+         formReset();
       } else if (radioKey === clickKey + 1) {
          radio.checked = true;
       }
@@ -105,18 +117,116 @@ const modalClose = document.querySelector(".modal_close");
 listenForClick(mainModalClose, modalMainContainer, overlay);
 listenForClick(modalClose, modalMainContainer, overlay);
 
-/* get modal "continue" & "select" button */
-const continueBtns = document.querySelectorAll(".continue_btn");
+/* get  "select" button */
 const selectRewardBtns = document.querySelectorAll(".select_reward_btn");
 listenForClick(selectRewardBtns, modalMainContainer, overlay);
 
+/* get modal "continue" button */
+const continueBtns = document.querySelectorAll(".continue_btn");
+
+// listenForClick(continueBtns, modalMainContainer, overlay);
+
+// const continueBtns = document.querySelectorAll(".continue_btn");
+// const test = listenForClick(continueBtns, modalMainContainer, overlay);
+
 /* ================= all about success modal ================= */
 const successModal = document.querySelector(".success_modal_main_container");
-listenForClick(continueBtns, successModal, overlay);
+
+const getModalContinueBtn = () => {
+   listenForClick(continueBtns, modalMainContainer, overlay);
+   listenForClick(continueBtns, successModal, overlay);
+};
 
 /*get  got it button to close success modal */
 const gotItBtn = document.querySelector(".got_it_btn");
 listenForClick(gotItBtn, successModal, overlay);
+
+/* ================= get statistics =================*/
+const numDaysLefts = document.querySelectorAll(".num_days_left");
+const pledgeForms = document.querySelectorAll(".pledge_form");
+
+const updateStatistics = (value) => {
+   let goalAmount = 100000;
+   let backedAmounts;
+   let totalBackers;
+   let progressBarLength;
+
+   const progressBar = document.querySelector(".progress_bar");
+   const statTotals = document.querySelectorAll(".stat_total");
+
+   statTotals.forEach((statTotal) => {
+      if (statTotal.classList.contains("total_amount_accummulated")) {
+         backedAmounts = Number(value) + Number(statTotal.textContent.slice(1).replace(/,/g, ""));
+
+         statTotal.innerHTML = "$" + `${backedAmounts.toLocaleString()}`;
+         progressBarLength = Math.floor((backedAmounts / goalAmount) * 100);
+         progressBar.style.width = `${progressBarLength}%`;
+      } else {
+         totalBackers = Number(statTotal.textContent.replace(/,/g, "")) + 1;
+         statTotal.innerHTML = `${totalBackers.toLocaleString()}`;
+      }
+   });
+};
+
+const updateDaysLeft = () => {
+   numDaysLefts.forEach((numDaysLeft) => {
+      let isTrue = true;
+      let remainingDays;
+
+      if (numDaysLeft.classList.contains("bamboo_num_days_left")) {
+         remainingDays = Number(numDaysLeft.firstChild.textContent) - 1;
+         numDaysLeft.innerHTML = remainingDays;
+         isTrue = false;
+      }
+
+      if (numDaysLeft.classList.contains("black_num_days_left") && isTrue) {
+         remainingDays = Number(numDaysLeft.firstChild.textContent) - 1;
+         numDaysLeft.innerHTML = remainingDays;
+      }
+   });
+};
+
+const updatePledges = (amount) => {
+   updateStatistics(amount);
+   updateDaysLeft();
+};
+
+/* validation input purposes */
+const amountInputs = document.querySelectorAll(".amount_input");
+amountInputs.forEach((amountInput, inputKey) => {
+   const warnings = document.querySelectorAll(".warning");
+   const inputBorders = document.querySelectorAll(".amount_label");
+
+   let timeOut;
+   const needUpdate = false;
+
+   amountInput.addEventListener("input", (event) => {
+      event.preventDefault();
+
+      if (amountInput.min > amountInput.value) {
+         if (timeOut) {
+            clearTimeout(timeOut);
+         }
+
+         warnings.forEach((warning, warnKey) => {
+            if (warnKey == inputKey) {
+               timeOut = setTimeout(() => {
+                  warning.classList.add("active");
+                  inputBorders[inputKey].classList.add("active");
+               }, 750);
+            }
+         });
+      } else {
+         warnings[inputKey].classList.remove("active");
+         inputBorders[inputKey].classList.remove("active");
+         needUpdate = true;
+      }
+   });
+
+   if (needUpdate) {
+      getModalContinueBtn();
+   }
+});
 
 /* ================= all about arrow up ================= */
 /* get up_arrow */
@@ -126,56 +236,3 @@ const arrowUP = document.querySelector(".scroll_up");
 window.addEventListener("scroll", () => {
    window.pageYOffset > 750 ? arrowUP.classList.add("active") : arrowUP.classList.remove("active");
 });
-
-/* get statistics */
-const statTotals = document.querySelectorAll(".stat_total");
-const numDaysLefts = document.querySelectorAll(".num_days_left");
-const pledgeForms = document.querySelectorAll(".pledge_form");
-const amountInputs = document.querySelectorAll(".amount_input");
-const progressBar = document.querySelector(".progress_bar");
-
-const updatePledges = (statTotals, numDaysLefts, amountInputs) => {
-   let goalAmount = 100000;
-   let backedAmounts;
-   let totalAmountsEl;
-   let totalBackers;
-   let totalBackersEl;
-   let remainingDays;
-   let amountPledge;
-   let progressBarLength;
-
-   statTotals.forEach((statTotal) => {
-      if (statTotal.classList.contains("total_backed")) {
-         backedAmounts = Number(statTotal.textContent.slice(1).replace(/,/g, ""));
-
-         totalAmountsEl = statTotal;
-      } else {
-         totalBackers = Number(statTotal.textContent.replace(/,/g, ""));
-         totalBackersEl = statTotal;
-      }
-   });
-
-   numDaysLefts.forEach((numDaysLeft) => {
-      if (numDaysLeft.classList.contains("bamboo_num_days_left")) {
-         remainingDays = Number(numDaysLeft.firstChild.textContent) - 1;
-         numDaysLeft.innerHTML = remainingDays;
-      }
-
-      if (numDaysLeft.classList.contains("black_num_days_left")) {
-         remainingDays = Number(numDaysLeft.firstChild.textContent) - 1;
-         numDaysLeft.innerHTML = remainingDays;
-      }
-   });
-
-   amountInputs.forEach((amountInput) => {
-      console.log("this amountInput", typeof amountInput.value);
-   });
-
-   totalBackersEl.innerHTML = `${totalBackers.toLocaleString()}`;
-   totalAmountsEl.innerHTML = "$" + `${backedAmounts.toLocaleString()}`;
-
-   progressBarLength = Math.floor((backedAmounts / goalAmount) * 100);
-   progressBar.style.width = `${progressBarLength}%`;
-};
-
-updatePledges(statTotals, numDaysLefts, amountInputs);
