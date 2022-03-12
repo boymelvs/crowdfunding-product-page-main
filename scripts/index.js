@@ -158,12 +158,14 @@ const updateStatistics = (value) => {
       if (statTotal.classList.contains("total_amount_accummulated")) {
          backedAmounts = Number(value) + Number(statTotal.textContent.slice(1).replace(/,/g, ""));
 
-         statTotal.innerHTML = "$" + `${backedAmounts.toLocaleString()}`;
+         statTotal.innerHTML = "$" + `${backedAmounts}`;
+         // statTotal.innerHTML = "$" + `${backedAmounts.toLocaleString()}`;
          progressBarLength = Math.floor((backedAmounts / goalAmount) * 100);
          progressBar.style.width = `${progressBarLength}%`;
       } else {
          totalBackers = Number(statTotal.textContent.replace(/,/g, "")) + 1;
-         statTotal.innerHTML = `${totalBackers.toLocaleString()}`;
+         // statTotal.innerHTML = `${totalBackers.toLocaleString()}`
+         statTotal.innerHTML = `${totalBackers}`;
       }
    });
 };

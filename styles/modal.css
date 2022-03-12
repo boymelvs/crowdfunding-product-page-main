@@ -322,12 +322,12 @@ input[type="radio"] {
    position: absolute;
    top: -2rem;
    font-size: 1.4rem;
-   color: var(--red);
 }
 
 /* add active classes using javascript */
 .warning.active {
    display: block;
+   color: var(--red);
 }
 
 @media (min-width: 376px) {
