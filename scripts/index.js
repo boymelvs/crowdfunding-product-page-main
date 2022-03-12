@@ -38,12 +38,10 @@ const formReset = () => {
 /* ================= radio button ================= */
 const radioReset = (element, clickKey) => {
    const radios = document.querySelectorAll('input[type="radio"]');
-   const forms = document.querySelectorAll("pledge_form");
 
    radios.forEach((radio, radioKey) => {
       if (element.classList.contains("got_it_btn") || element.classList.contains("back_btn") || element.classList.contains("modal_close_btn")) {
          radio.checked = false;
-
          formReset();
       } else if (radioKey === clickKey + 1) {
          radio.checked = true;
@@ -200,34 +198,28 @@ amountInputs.forEach((amountInput, inputKey) => {
    const inputBorders = document.querySelectorAll(".amount_label");
 
    let timeOut;
-   const needUpdate = false;
 
    amountInput.addEventListener("input", (event) => {
+      let removeWarning = true;
       event.preventDefault();
 
-      if (amountInput.min > amountInput.value) {
-         if (timeOut) {
-            clearTimeout(timeOut);
-         }
+      if (timeOut) {
+         clearTimeout(timeOut);
+      }
 
-         warnings.forEach((warning, warnKey) => {
-            if (warnKey == inputKey) {
-               timeOut = setTimeout(() => {
-                  warning.classList.add("active");
-                  inputBorders[inputKey].classList.add("active");
-               }, 750);
-            }
-         });
-      } else {
+      timeOut = setTimeout(() => {
+         if (Number(amountInput.min) > Number(amountInput.value)) {
+            warnings[inputKey].classList.add("active");
+            inputBorders[inputKey].classList.add("active");
+            removeWarning = false;
+         }
+      }, 750);
+
+      if (removeWarning) {
          warnings[inputKey].classList.remove("active");
          inputBorders[inputKey].classList.remove("active");
-         needUpdate = true;
       }
    });
-
-   if (needUpdate) {
-      getModalContinueBtn();
-   }
 });
 
 /* ================= all about arrow up ================= */
