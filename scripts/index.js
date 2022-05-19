@@ -122,7 +122,7 @@ listenForClick(selectRewardBtns, modalMainContainer, overlay);
 /* get modal "continue" button */
 const continueBtns = document.querySelectorAll(".continue_btn");
 
-// listenForClick(continueBtns, modalMainContainer, overlay);
+listenForClick(continueBtns, modalMainContainer, overlay);
 
 // const continueBtns = document.querySelectorAll(".continue_btn");
 // const test = listenForClick(continueBtns, modalMainContainer, overlay);
@@ -130,10 +130,12 @@ const continueBtns = document.querySelectorAll(".continue_btn");
 /* ================= all about success modal ================= */
 const successModal = document.querySelector(".success_modal_main_container");
 
-const getModalContinueBtn = () => {
-   listenForClick(continueBtns, modalMainContainer, overlay);
-   listenForClick(continueBtns, successModal, overlay);
-};
+listenForClick(continueBtns, successModal, overlay);
+
+// const getModalContinueBtn = () => {
+//    listenForClick(continueBtns, modalMainContainer, overlay);
+//    listenForClick(continueBtns, successModal, overlay);
+// };
 
 /*get  got it button to close success modal */
 const gotItBtn = document.querySelector(".got_it_btn");
