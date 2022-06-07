@@ -749,7 +749,7 @@ footer a {
 .mahogany_reward_btn,
 .continue_btn,
 .got_it_btn {
-   padding: 1.5rem 3.5rem;
+   padding: 1.5rem 3rem;
    border: none;
    border-radius: 3rem;
    background: var(--moderate-cyan);
@@ -767,15 +767,18 @@ footer a {
    cursor: pointer;
 }
 
-.mahogany_edition_stand_pledge {
+/* grayout the pledge when out of stock */
+.mahogany_edition_stand_pledge,
+.out_of_stock_pledge {
    filter: opacity(0.5);
-   cursor: default;
+   pointer-events: none;
 }
 
-.mahogany_reward_btn {
-   padding: 1.5rem 4.5rem;
+.mahogany_reward_btn,
+.out_of_stock_btn {
+   padding: 1.5rem 3.7rem;
    background: var(--dark-gray);
-   cursor: default;
+   pointer-events: none;
 }
 
 /* ================= all about animation ================= */

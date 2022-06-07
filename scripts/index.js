@@ -32,10 +32,12 @@ const addRemoveClasses = (elem) => {
 
 /* ================= form reset ================= */
 const forms = document.querySelectorAll(".pledge_form");
-const formReset = () => {
+const formReset = (radioKey) => {
    forms.forEach((form) => {
       form.reset();
    });
+
+   removeAllWarning(radioKey);
 };
 
 /* ================= radio button ================= */
@@ -45,7 +47,7 @@ const radioReset = (element, clickKey) => {
    radios.forEach((radio, radioKey) => {
       if (element.classList.contains("got_it_btn") || element.classList.contains("back_btn") || element.classList.contains("modal_close_btn")) {
          radio.checked = false;
-         formReset();
+         formReset(radioKey);
       } else if (radioKey === clickKey + 1) {
          radio.checked = true;
       }
@@ -132,8 +134,6 @@ const continueBtns = document.querySelectorAll(".continue_btn");
 /* ================= all about success modal ================= */
 const successModal = document.querySelector(".success_modal_main_container");
 
-// listenForClick(continueBtns, successModal, overlay);
-
 /* get  got it button to close success modal */
 const gotItBtn = document.querySelector(".got_it_btn");
 listenForClick(gotItBtn, successModal, overlay);
@@ -142,9 +142,6 @@ listenForClick(gotItBtn, successModal, overlay);
 //    UPDATING STATISTICS        //
 ///////////////////////////////////
 /* ================= get statistics =================*/
-const numDaysLefts = document.querySelectorAll(".num_days_left");
-const pledgeForms = document.querySelectorAll(".pledge_form");
-
 const updateStatistics = (value) => {
    let goalAmount = 100000;
    let backedAmounts;
@@ -170,22 +167,54 @@ const updateStatistics = (value) => {
    });
 };
 
+/* ================= get number of days left =================*/
+const numDaysLefts = document.querySelectorAll(".num_days");
+const modalNumDaysLefts = document.querySelectorAll(".modal_num_days");
+const standPledges = document.querySelectorAll(".stand_pledges");
+const pledgesDescriptionContainer = document.querySelectorAll(".pledge_description_container");
+const grayOuts = document.querySelectorAll(".gray_out_modal");
+
+/* gray out and disable the pledges if day turn zero */
+const outOFStock = (numDaysLeftKey) => {
+   selectRewardBtns[numDaysLeftKey].textContent = "Out of Stock";
+   selectRewardBtns[numDaysLeftKey].classList.add("out_of_stock_btn");
+   standPledges[numDaysLeftKey].classList.add("out_of_stock_pledge");
+   grayOuts[numDaysLeftKey].classList.add("out_of_stock_modal_pledge");
+};
+
 const updateDaysLeft = (standNum) => {
-   numDaysLefts.forEach((numDaysLeft, keyStand) => {
-      // if (standNum == keyStand + 1) {
-      let remainingDays = Number(numDaysLeft.firstChild.textContent) - 1;
-      numDaysLeft.innerHTML = remainingDays;
-      // }
+   numDaysLefts.forEach((numDaysLeft, numDaysLeftKey) => {
+      if (standNum == numDaysLeftKey + 1) {
+         let remainingDays = Number(numDaysLeft.innerHTML) - 1;
+
+         if (remainingDays == 0) {
+            outOFStock(numDaysLeftKey);
+         }
+         numDaysLeft.innerHTML = remainingDays;
+      }
+   });
+
+   modalNumDaysLefts.forEach((modalNumDaysLeft, modalNumDaysLeftKey) => {
+      if (standNum == modalNumDaysLeftKey + 1) {
+         let remainingDays = Number(modalNumDaysLeft.innerHTML) - 1;
+
+         modalNumDaysLeft.innerHTML = remainingDays;
+      }
    });
 };
 
 /* validation input purposes */
 const amountInputs = document.querySelectorAll(".amount_input");
+const warnings = document.querySelectorAll(".warning");
+const inputBorders = document.querySelectorAll(".amount_label");
+
+/* remove warning input value */
+const removeAllWarning = (inputKey) => {
+   warnings[inputKey].classList.remove("active");
+   inputBorders[inputKey].classList.remove("active");
+};
 
 amountInputs.forEach((amountInput, inputKey) => {
-   const warnings = document.querySelectorAll(".warning");
-   const inputBorders = document.querySelectorAll(".amount_label");
-
    let timeOut;
 
    amountInput.addEventListener("input", (event) => {
@@ -205,8 +234,7 @@ amountInputs.forEach((amountInput, inputKey) => {
       }, 750);
 
       if (removeWarning) {
-         warnings[inputKey].classList.remove("active");
-         inputBorders[inputKey].classList.remove("active");
+         removeAllWarning(inputKey);
       }
    });
 });
@@ -214,14 +242,14 @@ amountInputs.forEach((amountInput, inputKey) => {
 //////////////////////////////
 //    FORMS SUBMISSION      //
 //////////////////////////////
-forms.forEach((form, formKey) => {
-   form.addEventListener("submit", (e) => {
+const pledgeForms = document.querySelectorAll(".pledge_form");
+pledgeForms.forEach((pledgeForm, pledgeFormKey) => {
+   pledgeForm.addEventListener("submit", (e) => {
       e.preventDefault();
-      let value = amountInputs[formKey].value;
+      let value = amountInputs[pledgeFormKey].value;
 
       updateStatistics(value);
-      updateDaysLeft(formKey);
-      console.log("value", amountInputs[formKey].value);
+      updateDaysLeft(pledgeFormKey);
 
       addRemoveClasses(modalMainContainer);
       addRemoveClasses(successModal);

@@ -194,9 +194,9 @@ input[type="radio"] {
    color: var(--moderate-cyan);
 }
 
-.reward_label:hover > .noreward_title,
-.reward_label:hover > .bamboo_title,
-.reward_label:hover > .black_title {
+.noreward_label:hover > .noreward_title,
+.bamboo_label:hover > .bamboo_title,
+.black_label:hover > .black_title {
    color: var(--moderate-cyan);
    cursor: pointer;
 }
@@ -492,7 +492,7 @@ input[type="radio"] {
    display: flex;
 }
 
-/* ================= black edition stand pledge ================= */
+/* ================= mahogany edition stand pledge ================= */
 
 .mahogany_modal_pledges {
    border: 0.1rem solid var(--light-gray);
@@ -507,7 +507,9 @@ input[type="radio"] {
    position: absolute;
 }
 
-.mahogany_modal_pledges {
+/* grayout the pledge modal when out of stock */
+.mahogany_modal_pledges,
+.out_of_stock_modal_pledge {
    filter: opacity(0.5);
-   cursor: default;
+   pointer-events: none;
 }
