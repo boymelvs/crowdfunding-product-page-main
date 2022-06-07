@@ -127,10 +127,6 @@ listenForClick(modalClose, modalMainContainer, overlay);
 const selectRewardBtns = document.querySelectorAll(".select_reward_btn");
 listenForClick(selectRewardBtns, modalMainContainer, overlay);
 
-/* get modal "continue" button */
-const continueBtns = document.querySelectorAll(".continue_btn");
-// listenForClick(continueBtns, modalMainContainer, overlay);
-
 /* ================= all about success modal ================= */
 const successModal = document.querySelector(".success_modal_main_container");
 
