@@ -154,7 +154,8 @@ const updateStatistics = (value) => {
          // statTotal.innerHTML = "$" + `${backedAmounts}`;
          statTotal.innerHTML = "$" + `${backedAmounts.toLocaleString()}`;
          progressBarLength = Math.floor((backedAmounts / goalAmount) * 100);
-         progressBar.style.width = `${progressBarLength}%`;
+         progressBar.style.width = `${progressBarLength > 100 ? 100 : progressBarLength}%`;
+         console.log(progressBarLength);
       } else {
          totalBackers = Number(statTotal.textContent.replace(/,/g, "")) + 1;
          statTotal.innerHTML = `${totalBackers.toLocaleString()}`;
